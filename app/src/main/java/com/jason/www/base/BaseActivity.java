@@ -1,5 +1,6 @@
 package com.jason.www.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -19,10 +20,14 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Unbinder unbinder;
-//    protected T viewBinding;
+    //    protected T viewBinding;
+    protected Context mContext;
+    protected AppCompatActivity mActivity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mContext = this;
+        mActivity = this;
         super.onCreate(savedInstanceState);
         beforeSetContentView();
 //        viewBinding = bindDataBingding();
