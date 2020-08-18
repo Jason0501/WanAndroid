@@ -1,7 +1,5 @@
 package com.jason.www.net;
 
-import com.jason.www.net.response.base.BaseResponse;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -21,13 +19,13 @@ public interface RetrofitUrl {
 
     @FormUrlEncoded
     @POST("user/register")
-    Call<BaseResponse> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    Call<ResponseBody> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
     @FormUrlEncoded
     @POST("user/login")
     Call<ResponseBody> login(@Field("username") String username, @Field("password") String password);
 
     @GET("article/list/{page}/json")
-    Call<BaseResponse> getHomeArticles(@Path("page") int page);
+    Call<ResponseBody> getHomeArticles(@Path("page") int page);
 
 }

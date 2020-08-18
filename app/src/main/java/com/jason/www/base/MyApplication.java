@@ -2,8 +2,6 @@ package com.jason.www.base;
 
 import android.app.Application;
 
-import org.xutils.x;
-
 /**
  * @author：Jason
  * @date：2020/8/14 15:12
@@ -11,9 +9,16 @@ import org.xutils.x;
  * @description:
  */
 public class MyApplication extends Application {
+    private static Application instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        x.Ext.init(this);
+//        x.Ext.init(this);
+        instance = this;
+    }
+
+    public static Application getInstance() {
+        return instance;
     }
 }

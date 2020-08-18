@@ -20,13 +20,13 @@ public class HomeArticleBody {
      * total : 9002
      */
 
-    private int curPage;
-    private int offset;
-    private boolean over;
-    private int pageCount;
-    private int size;
-    private int total;
-    private List<HomeArticle> datas;
+    public int curPage;
+    public int offset;
+    public boolean over;
+    public int pageCount;
+    public int size;
+    public int total;
+    public List<HomeArticle> datas;
 
     public int getCurPage() {
         return curPage;
@@ -120,38 +120,38 @@ public class HomeArticleBody {
          * zan : 0
          */
 
-        private String apkLink;
-        private int audit;
-        private String author;
-        private boolean canEdit;
-        private int chapterId;
-        private String chapterName;
-        private boolean collect;
-        private int courseId;
-        private String desc;
-        private String descMd;
-        private String envelopePic;
-        private boolean fresh;
-        private int id;
-        private String link;
-        private String niceDate;
-        private String niceShareDate;
-        private String origin;
-        private String prefix;
-        private String projectLink;
-        private long publishTime;
-        private int realSuperChapterId;
-        private int selfVisible;
-        private long shareDate;
-        private String shareUser;
-        private int superChapterId;
-        private String superChapterName;
-        private String title;
-        private int type;
-        private int userId;
-        private int visible;
-        private int zan;
-        private List<TagsBean> tags;
+        public String apkLink;
+        public int audit;
+        public String author;
+        public boolean canEdit;
+        public int chapterId;
+        public String chapterName;
+        public boolean collect;
+        public int courseId;
+        public String desc;
+        public String descMd;
+        public String envelopePic;
+        public boolean fresh;
+        public int id;
+        public String link;
+        public String niceDate;
+        public String niceShareDate;
+        public String origin;
+        public String prefix;
+        public String projectLink;
+        public long publishTime;
+        public int realSuperChapterId;
+        public int selfVisible;
+        public long shareDate;
+        public String shareUser;
+        public int superChapterId;
+        public String superChapterName;
+        public String title;
+        public int type;
+        public int userId;
+        public int visible;
+        public int zan;
+        public List<TagsBean> tags;
 
         public String getApkLink() {
             return apkLink;
@@ -415,8 +415,8 @@ public class HomeArticleBody {
              * url : /wxarticle/list/408/1
              */
 
-            private String name;
-            private String url;
+            public String name;
+            public String url;
 
             public String getName() {
                 return name;

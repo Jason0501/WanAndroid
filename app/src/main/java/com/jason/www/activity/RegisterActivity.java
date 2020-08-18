@@ -5,17 +5,19 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
+import com.jason.www.net.HttpRequestCallback;
 import com.jason.www.net.RetrofitHelper;
+import com.jason.www.net.response.Register;
 import com.jason.www.net.response.base.BaseResponse;
 import com.jason.www.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegisterActivity extends BaseActivity {
     @BindView(R.id.edittext_username)
@@ -51,10 +53,10 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick(R.id.btn_regist)
     public void onViewClicked() {
-        String userName = edittextUsername.getText().toString();
+        String username = edittextUsername.getText().toString();
         String password = edittextPassword.getText().toString();
         String repassword = edittextRepassword.getText().toString();
-        if (TextUtils.isEmpty(userName)) {
+        if (TextUtils.isEmpty(username)) {
             showToast("请先输入用户名");
             return;
         }
@@ -70,25 +72,29 @@ public class RegisterActivity extends BaseActivity {
             showToast("两次密码输入不一样");
             return;
         }
-        RetrofitHelper.getInstance()
-                .getRetrofitUrl()
-                .register(userName, password, repassword)
-                .enqueue(new Callback<BaseResponse>() {
-                    @Override
-                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                        LogUtils.i("RegisterActivity:" + response.body() + "");
-                        if (response.body().errorCode == BaseResponse.SUCCESS) {
-                            showToast("注册成功");
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-                        } else {
-                            showToast("注册失败：" + response.message());
-                        }
-                    }
+        register(username, password, repassword);
+    }
 
-                    @Override
-                    public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        showToast(t.getLocalizedMessage());
-                    }
-                });
+    private void register(String username, String password, String repassword) {
+        RetrofitHelper.getInstance().enqueue(new HttpRequestCallback<BaseResponse<Register>>() {
+            @Override
+            public void success(BaseResponse<Register> response) {
+                LogUtils.i(response.toString());
+                if (response.isOk()) {
+                    startActivity(new Intent(mContext, MainActivity.class));
+                }
+            }
+
+            @Override
+            public void fail(int code, String msg) {
+                LogUtils.i(msg);
+            }
+
+            @Override
+            public Call<ResponseBody> getApi() {
+                return RetrofitHelper.getInstance().getRetrofitUrl().register(username, password, repassword);
+            }
+        }, new TypeToken<BaseResponse<Register>>() {
+        }.getType());
     }
 }

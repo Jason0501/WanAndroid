@@ -8,7 +8,7 @@ package com.jason.www.net;
  */
 public class Urls {
     public static final String BASE_SERVER_URL = "https://www.wanandroid.com/";
-    public static final String TEST_URL = "https://jsonplaceholder.typicode.com/posts";
+    public static final String BEAUTY_LIST = "https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10";
     /**
      * 用户相关,post
      */

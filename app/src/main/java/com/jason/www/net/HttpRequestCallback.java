@@ -1,7 +1,5 @@
 package com.jason.www.net;
 
-import com.jason.www.net.response.base.BaseResponse;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -12,7 +10,7 @@ import retrofit2.Call;
  * @description:
  */
 public interface HttpRequestCallback<T> {
-    void success(BaseResponse response);
+    void success(T response);
 
     void fail(int code, String msg);
 

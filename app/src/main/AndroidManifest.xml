@@ -16,12 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/activity_main" />
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/activity_login"
             android:windowSoftInputMode="adjustPan|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +28,6 @@
         </activity>
         <activity
             android:name=".activity.RegisterActivity"
-            android:label="@string/activity_register"
             android:windowSoftInputMode="adjustPan|stateVisible" />
     </application>
 

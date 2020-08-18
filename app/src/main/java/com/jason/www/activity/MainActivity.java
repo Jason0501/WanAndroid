@@ -1,19 +1,20 @@
 package com.jason.www.activity;
 
+import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.base.BaseActivity;
+import com.jason.www.net.HttpRequestCallback;
 import com.jason.www.net.RetrofitHelper;
+import com.jason.www.net.response.HomeArticleBody;
 import com.jason.www.net.response.base.BaseResponse;
-import com.jason.www.utils.LogUtils;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -32,25 +33,29 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        RetrofitHelper.getInstance().getRetrofitUrl().getHomeArticles(1).enqueue(new Callback<BaseResponse>() {
+        requestBeauty();
+    }
+
+    private void requestBeauty() {
+        RetrofitHelper.getInstance().enqueue(new HttpRequestCallback<BaseResponse<HomeArticleBody>>() {
             @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                if (response.body().errorCode == BaseResponse.SUCCESS) {
-//                    HomeArticleBody homeArticleBody = response.body().data;
-//                    if (homeArticleBody == null || CollectionUtils.isEmpty(homeArticleBody.getDatas())) {
-//                        showToast("暂无文章数据");
-//                        return;
-//                    }
-//                    homeAdapter.addData(homeArticleBody.getDatas());
+            public void success(BaseResponse<HomeArticleBody> response) {
+                if (response.isOk()) {
+                    homeAdapter.addData(response.data.getDatas());
                 }
             }
 
             @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
-                LogUtils.i("MainActivity error:" + t.getMessage());
-                showToast("加载失败：" + t.getMessage());
+            public void fail(int code, String msg) {
+
             }
-        });
+
+            @Override
+            public Call<ResponseBody> getApi() {
+                return RetrofitHelper.getInstance().getRetrofitUrl().getHomeArticles(0);
+            }
+        }, new TypeToken<BaseResponse<HomeArticleBody>>() {
+        }.getType());
     }
 
     @Override
