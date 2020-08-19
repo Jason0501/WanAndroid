@@ -1,4 +1,4 @@
-package com.jason.www.net.response.base;
+package com.jason.www.http.response.base;
 
 /**
  * @author：Jason

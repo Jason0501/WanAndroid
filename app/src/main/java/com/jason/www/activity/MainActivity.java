@@ -8,10 +8,10 @@ import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.base.BaseActivity;
-import com.jason.www.net.RetrofitHelper;
-import com.jason.www.net.SmartHttpCallback;
-import com.jason.www.net.response.HomeArticleBody;
-import com.jason.www.net.response.base.BaseResponse;
+import com.jason.www.http.RetrofitHelper;
+import com.jason.www.http.SmartHttpCallback;
+import com.jason.www.http.response.HomeArticleBody;
+import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.utils.IntentUtils;
 import com.jason.www.utils.SystemUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void requestHomeArticle() {
-        RetrofitHelper.getInstance().enqueue(new SmartHttpCallback<HomeArticleBody>() {
+        RetrofitHelper.enqueue2(new SmartHttpCallback<HomeArticleBody>() {
             @Override
             public void success(BaseResponse<HomeArticleBody> response) {
                 if (response.isOk()) {
@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public Call<ResponseBody> getApi() {
-                return RetrofitHelper.getInstance().getRetrofitUrl().getHomeArticles(page++);
+                return RetrofitHelper.getApi().getHomeArticles(page++);
             }
         }, new TypeToken<BaseResponse<HomeArticleBody>>() {
         }.getType());

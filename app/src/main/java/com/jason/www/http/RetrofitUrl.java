@@ -1,4 +1,4 @@
-package com.jason.www.net;
+package com.jason.www.http;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

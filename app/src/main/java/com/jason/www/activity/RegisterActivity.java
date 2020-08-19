@@ -9,10 +9,10 @@ import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseActivity;
-import com.jason.www.net.BaseHttpCallback;
-import com.jason.www.net.RetrofitHelper;
-import com.jason.www.net.response.Register;
-import com.jason.www.net.response.base.BaseResponse;
+import com.jason.www.http.BaseHttpCallback;
+import com.jason.www.http.RetrofitHelper;
+import com.jason.www.http.response.Register;
+import com.jason.www.http.response.base.BaseResponse;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -76,7 +76,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void register(String username, String password, String repassword) {
-        RetrofitHelper.getInstance().enqueue(new BaseHttpCallback<Register>() {
+        RetrofitHelper.enqueue2(new BaseHttpCallback<Register>() {
             @Override
             public void success(BaseResponse<Register> response) {
                 if (response.isOk()) {
@@ -95,7 +95,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public Call<ResponseBody> getApi() {
-                return RetrofitHelper.getInstance().getRetrofitUrl().register(username, password, repassword);
+                return RetrofitHelper.getApi().register(username, password, repassword);
             }
         }, new TypeToken<BaseResponse<Register>>() {
         }.getType());

@@ -9,10 +9,10 @@ import android.widget.EditText;
 import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
-import com.jason.www.net.BaseHttpCallback;
-import com.jason.www.net.RetrofitHelper;
-import com.jason.www.net.response.Login;
-import com.jason.www.net.response.base.BaseResponse;
+import com.jason.www.http.BaseHttpCallback;
+import com.jason.www.http.RetrofitHelper;
+import com.jason.www.http.response.Login;
+import com.jason.www.http.response.base.BaseResponse;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login(String username, String password) {
-        RetrofitHelper.getInstance().enqueue(new BaseHttpCallback<Login>() {
+        RetrofitHelper.enqueue2(new BaseHttpCallback<Login>() {
             @Override
             public void success(BaseResponse<Login> response) {
                 if (response.isOk()) {
@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public Call<ResponseBody> getApi() {
-                return RetrofitHelper.getInstance().getRetrofitUrl().login(username, password);
+                return RetrofitHelper.getApi().login(username, password);
             }
         }, new TypeToken<BaseResponse<Login>>() {
         }.getType());

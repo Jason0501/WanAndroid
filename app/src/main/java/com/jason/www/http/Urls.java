@@ -1,4 +1,4 @@
-package com.jason.www.net;
+package com.jason.www.http;
 
 /**
  * @author：Jason

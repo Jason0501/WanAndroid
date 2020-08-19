@@ -3,7 +3,7 @@ package com.jason.www.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.jason.www.R;
-import com.jason.www.net.response.HomeArticleBody;
+import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.utils.DateUtils;
 import com.jason.www.utils.TextUtils;
 

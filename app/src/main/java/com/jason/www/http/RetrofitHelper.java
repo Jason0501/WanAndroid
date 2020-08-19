@@ -1,6 +1,6 @@
-package com.jason.www.net;
+package com.jason.www.http;
 
-import com.jason.www.net.response.base.BaseResponse;
+import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.utils.GsonUtils;
 import com.jason.www.utils.LogUtils;
 
@@ -22,29 +22,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @email：1129847330@qq.com
  * @description:
  */
-public class RetrofitHelper<T> {
-    private static RetrofitHelper retrofitHelper;
-    private RetrofitUrl retrofitUrl;
-    private Call<ResponseBody> call;
+public class RetrofitHelper {
+    private static Retrofit retrofit;
 
-    public static RetrofitHelper getInstance() {
-        if (retrofitHelper == null) {
+    private RetrofitHelper() {
+    }
+
+    private static Retrofit getRetrofit() {
+        if (retrofit == null) {
             synchronized (RetrofitHelper.class) {
-                if (retrofitHelper == null) {
-                    retrofitHelper = new RetrofitHelper();
+                if (retrofit == null) {
+                    retrofit = initRetrofit();
                 }
             }
         }
-        return retrofitHelper;
+        return retrofit;
     }
 
-    private RetrofitHelper() {
-        retrofitUrl = new Retrofit.Builder()
+    private static Retrofit initRetrofit() {
+        return new Retrofit.Builder()
                 .baseUrl(RetrofitUrl.BASE_URL)
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(RetrofitUrl.class);
+                .build();
     }
 
     /**
@@ -52,7 +52,7 @@ public class RetrofitHelper<T> {
      *
      * @return
      */
-    private OkHttpClient getOkHttpClient() {
+    private static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //忽略https证书验证，允许抓包
         builder.sslSocketFactory(SSLFactory.createSSLSocketFactory(), new SSLFactory.TrustAllManager());
@@ -62,8 +62,8 @@ public class RetrofitHelper<T> {
         return client;
     }
 
-    public RetrofitUrl getRetrofitUrl() {
-        return retrofitUrl;
+    public static RetrofitUrl getApi() {
+        return getRetrofit().create(RetrofitUrl.class);
     }
 
     /**
@@ -71,11 +71,11 @@ public class RetrofitHelper<T> {
      *
      * @param callback
      */
-    public <T> void enqueue(BaseHttpCallback<T> callback, Type type) {
+    public static <T> void enqueue(BaseHttpCallback<T> callback, Type type) {
         if (callback == null) {
             throw new NullPointerException("callback must not be null");
         }
-        call = callback.getApi();
+        Call<ResponseBody> call = callback.getApi();
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -114,9 +114,38 @@ public class RetrofitHelper<T> {
         });
     }
 
-    public void cancel() {
-        if (call != null && !call.isCanceled()) {
-            call.cancel();
+    public static <T> void enqueue2(BaseHttpCallback<T> callback, Type type) {
+        if (callback == null) {
+            throw new NullPointerException("callback must not be null");
         }
+        Call<ResponseBody> call = callback.getApi();
+        call.enqueue(new HttpCallback<BaseResponse<T>>(type) {
+            @Override
+            public void success(BaseResponse<T> response) {
+                if (callback != null) {
+                    callback.success(response);
+                    if (callback instanceof SmartHttpCallback) {
+                        ((SmartHttpCallback<T>) callback).finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                super.onFailure(call, t);
+                if (callback != null) {
+                    callback.fail(BaseResponse.FAIL, t.getMessage());
+                    if (callback instanceof SmartHttpCallback) {
+                        ((SmartHttpCallback<T>) callback).finish();
+                    }
+                }
+            }
+        });
+    }
+
+    public void cancel() {
+//        if (call != null && !call.isCanceled()) {
+//            call.cancel();
+//        }
     }
 }

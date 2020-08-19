@@ -1,4 +1,4 @@
-package com.jason.www.net.response;
+package com.jason.www.http.response;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.jason.www.net;
+package com.jason.www.http;
 
-import com.jason.www.net.response.base.BaseResponse;
+import com.jason.www.http.response.base.BaseResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
