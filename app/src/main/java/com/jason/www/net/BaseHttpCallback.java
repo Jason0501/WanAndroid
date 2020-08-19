@@ -1,5 +1,7 @@
 package com.jason.www.net;
 
+import com.jason.www.net.response.base.BaseResponse;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
@@ -9,8 +11,8 @@ import retrofit2.Call;
  * @email：1129847330@qq.com
  * @description:
  */
-public interface HttpRequestCallback<T> {
-    void success(T response);
+public interface BaseHttpCallback<T> {
+    void success(BaseResponse<T> response);
 
     void fail(int code, String msg);
 

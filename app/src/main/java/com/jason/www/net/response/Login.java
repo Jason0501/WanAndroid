@@ -1,5 +1,7 @@
 package com.jason.www.net.response;
 
+import java.util.List;
+
 /**
  * @author：Jason
  * @date：2020/8/11 11:32
@@ -18,8 +20,8 @@ public class Login {
     public String token;
     public int type;
     public String username;
-    public int chapterTops;
-    public int collectIds;
+    public List<String> chapterTops;
+    public List<String> collectIds;
 
     @Override
     public String toString() {

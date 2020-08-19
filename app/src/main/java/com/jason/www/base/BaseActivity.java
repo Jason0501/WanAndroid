@@ -20,7 +20,6 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Unbinder unbinder;
-    //    protected T viewBinding;
     protected Context mContext;
     protected AppCompatActivity mActivity;
 
@@ -30,15 +29,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         mActivity = this;
         super.onCreate(savedInstanceState);
         beforeSetContentView();
-//        viewBinding = bindDataBingding();
-//        View view = viewBinding.getRoot();
         setContentView(getLayoutResId());
+        ActivityStackManager.getInstance().addActivity(this);
         unbinder = ButterKnife.bind(this);
         initView();
         initData();
     }
-
-//    protected abstract T bindDataBingding();
 
     protected abstract void initView();
 
@@ -60,7 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        viewBinding = null;
+        ActivityStackManager.getInstance().finishActivity(this);
         unbinder.unbind();
         unbinder = null;
     }

@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author：Jason
@@ -21,7 +22,7 @@ import retrofit2.Retrofit;
  * @email：1129847330@qq.com
  * @description:
  */
-public class RetrofitHelper {
+public class RetrofitHelper<T> {
     private static RetrofitHelper retrofitHelper;
     private RetrofitUrl retrofitUrl;
     private Call<ResponseBody> call;
@@ -41,7 +42,7 @@ public class RetrofitHelper {
         retrofitUrl = new Retrofit.Builder()
                 .baseUrl(RetrofitUrl.BASE_URL)
                 .client(getOkHttpClient())
-//                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitUrl.class);
     }
@@ -70,7 +71,7 @@ public class RetrofitHelper {
      *
      * @param callback
      */
-    public <T> void enqueue(HttpRequestCallback<T> callback, Type type) {
+    public <T> void enqueue(BaseHttpCallback<T> callback, Type type) {
         if (callback == null) {
             throw new NullPointerException("callback must not be null");
         }
@@ -83,8 +84,8 @@ public class RetrofitHelper {
                         try {
                             String content = response.body().string();
                             LogUtils.i("onResponse:" + content);
-                            T baseResponse = GsonUtils.getGson().fromJson(content, type);
-                            callback.success(baseResponse);
+                            BaseResponse<T> result = GsonUtils.getGson().fromJson(content, type);
+                            callback.success(result);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -95,6 +96,9 @@ public class RetrofitHelper {
                         callback.fail(response.code(), response.message());
                     }
                 }
+                if (callback != null && callback instanceof SmartHttpCallback) {
+                    ((SmartHttpCallback<T>) callback).finish();
+                }
             }
 
             @Override
@@ -102,6 +106,9 @@ public class RetrofitHelper {
                 LogUtils.i("onFailure->请求失败：" + t.getMessage());
                 if (callback != null) {
                     callback.fail(BaseResponse.FAIL, t.getMessage());
+                }
+                if (callback != null && callback instanceof SmartHttpCallback) {
+                    ((SmartHttpCallback<T>) callback).finish();
                 }
             }
         });

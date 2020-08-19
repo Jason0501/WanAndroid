@@ -29,6 +29,7 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity android:name=".activity.WebViewActivity" />
     </application>
 
 </manifest>

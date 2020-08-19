@@ -10,7 +10,7 @@ import java.util.Date;
  * @description:
  */
 public class DateUtils {
-    public static final String PATTERN_YMDHMS = "yyyy-MM-DD HH:mm:ss";
+    public static final String PATTERN_YMDHMS = "yyyy-MM-dd HH:mm:ss";
     private static SimpleDateFormat format_ymdhms = new SimpleDateFormat(PATTERN_YMDHMS);
 
     public static String formatTimeStamp2YMDHms(long timestamp) {

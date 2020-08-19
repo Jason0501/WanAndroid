@@ -4,6 +4,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.jason.www.R;
 import com.jason.www.net.response.HomeArticleBody;
+import com.jason.www.utils.DateUtils;
+import com.jason.www.utils.TextUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,5 +22,8 @@ public class HomeAdapter extends BaseQuickAdapter<HomeArticleBody.HomeArticle, B
 
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, HomeArticleBody.HomeArticle article) {
+        baseViewHolder.setText(R.id.textview_title_item_home_article, article.getTitle());
+        baseViewHolder.setText(R.id.textview_time_and_author_item_home_article, String.format("by-%s %s", TextUtils.isEmpty(article.getAuthor()) ?
+                article.getShareUser() : article.getAuthor(), DateUtils.formatTimeStamp2YMDHms(article.getPublishTime())));
     }
 }

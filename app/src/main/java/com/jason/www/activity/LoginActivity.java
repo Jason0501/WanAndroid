@@ -9,12 +9,10 @@ import android.widget.EditText;
 import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
-import com.jason.www.net.HttpRequestCallback;
+import com.jason.www.net.BaseHttpCallback;
 import com.jason.www.net.RetrofitHelper;
 import com.jason.www.net.response.Login;
 import com.jason.www.net.response.base.BaseResponse;
-import com.jason.www.utils.LogUtils;
-import com.jason.www.utils.SystemUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -73,18 +71,19 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login(String username, String password) {
-        RetrofitHelper.getInstance().enqueue(new HttpRequestCallback<BaseResponse<Login>>() {
+        RetrofitHelper.getInstance().enqueue(new BaseHttpCallback<Login>() {
             @Override
             public void success(BaseResponse<Login> response) {
-                LogUtils.i("success:" + response.toString());
                 if (response.isOk()) {
                     startActivity(new Intent(mContext, MainActivity.class));
+                    mActivity.finish();
+                } else {
+                    showToast(response.errorMsg);
                 }
             }
 
             @Override
             public void fail(int code, String msg) {
-                LogUtils.i("fail:" + msg);
                 showToast(msg);
             }
 
@@ -94,12 +93,5 @@ public class LoginActivity extends BaseActivity {
             }
         }, new TypeToken<BaseResponse<Login>>() {
         }.getType());
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SystemUtils.killMySelfProcess();
     }
 }

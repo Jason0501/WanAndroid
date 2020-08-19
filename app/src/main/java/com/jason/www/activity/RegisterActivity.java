@@ -7,12 +7,12 @@ import android.widget.EditText;
 
 import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
+import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseActivity;
-import com.jason.www.net.HttpRequestCallback;
+import com.jason.www.net.BaseHttpCallback;
 import com.jason.www.net.RetrofitHelper;
 import com.jason.www.net.response.Register;
 import com.jason.www.net.response.base.BaseResponse;
-import com.jason.www.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -76,18 +76,21 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void register(String username, String password, String repassword) {
-        RetrofitHelper.getInstance().enqueue(new HttpRequestCallback<BaseResponse<Register>>() {
+        RetrofitHelper.getInstance().enqueue(new BaseHttpCallback<Register>() {
             @Override
             public void success(BaseResponse<Register> response) {
-                LogUtils.i(response.toString());
                 if (response.isOk()) {
+                    mActivity.finish();
                     startActivity(new Intent(mContext, MainActivity.class));
+                    ActivityStackManager.getInstance().finishActivity(LoginActivity.class);
+                } else {
+                    showToast(response.errorMsg);
                 }
             }
 
             @Override
             public void fail(int code, String msg) {
-                LogUtils.i(msg);
+                showToast(msg);
             }
 
             @Override
