@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.HttpException;
 import retrofit2.Response;
 
 /**
@@ -25,12 +26,17 @@ public abstract class HttpCallback<E> implements Callback<ResponseBody> {
 
     @Override
     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-        try {
-            String content = response.body().string();
-            E e = GsonUtils.getGson().fromJson(content, type);
-            success(e);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (response.isSuccessful()) {
+            try {
+                String content = response.body().string();
+                E e = GsonUtils.getGson().fromJson(content, type);
+                success(e);
+            } catch (IOException e) {
+                e.printStackTrace();
+                onFailure(call, e);
+            }
+        } else {
+            onFailure(call, new HttpException(response));
         }
     }
 
