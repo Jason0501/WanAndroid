@@ -1,9 +1,9 @@
 package com.jason.www.http;
 
+import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.utils.GsonUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -17,20 +17,21 @@ import retrofit2.Response;
  * @email：1129847330@qq.com
  * @description:
  */
-public abstract class HttpCallback<E> implements Callback<ResponseBody> {
-    public HttpCallback(Type type) {
-        this.type = type;
-    }
+public abstract class HttpCallback<T> implements Callback<ResponseBody> {
+    private Class clazz;
 
-    private Type type;
+    public HttpCallback(Class clazz) {
+        this.clazz = clazz;
+    }
 
     @Override
     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
         if (response.isSuccessful()) {
             try {
                 String content = response.body().string();
-                E e = GsonUtils.getGson().fromJson(content, type);
-                success(e);
+                ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl(BaseResponse.class, new Class[]{clazz});
+                BaseResponse<T> result = GsonUtils.getGson().fromJson(content, parameterizedType);
+                success(result);
             } catch (IOException e) {
                 e.printStackTrace();
                 onFailure(call, e);
@@ -45,5 +46,5 @@ public abstract class HttpCallback<E> implements Callback<ResponseBody> {
 
     }
 
-    public abstract void success(E response);
+    public abstract void success(BaseResponse<T> response);
 }

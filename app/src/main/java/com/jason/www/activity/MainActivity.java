@@ -1,16 +1,17 @@
 package com.jason.www.activity;
 
+import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.base.BaseActivity;
 import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.SmartHttpCallback;
 import com.jason.www.http.response.HomeArticleBody;
+import com.jason.www.http.response.WeChatPublicAccount;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.utils.IntentUtils;
 import com.jason.www.utils.SystemUtils;
@@ -18,6 +19,8 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -73,8 +76,33 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        smartRefreshLayout.autoRefresh();
-        requestHomeArticle();
+//        smartRefreshLayout.autoRefresh();
+//        requestHomeArticle();
+        requestWeChatPublicAccounts();
+    }
+
+    private void requestWeChatPublicAccounts() {
+        RetrofitHelper.enqueue2(new SmartHttpCallback<List<WeChatPublicAccount>>() {
+            @Override
+            public void success(BaseResponse<List<WeChatPublicAccount>> response) {
+                if (response.isOk()) {
+                    showToast("success to get wechat public accounts");
+                    Log.d("MainActivity", response.data.toString());
+                } else {
+                    showToast(response.errorMsg);
+                }
+            }
+
+            @Override
+            public void fail(int code, String msg) {
+
+            }
+
+            @Override
+            public Call<ResponseBody> getApi() {
+                return null;
+            }
+        }, List.class);
     }
 
     private void requestHomeArticle() {
@@ -107,8 +135,7 @@ public class MainActivity extends BaseActivity {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().getHomeArticles(page++);
             }
-        }, new TypeToken<BaseResponse<HomeArticleBody>>() {
-        }.getType());
+        }, HomeArticleBody.class);
     }
 
     @Override

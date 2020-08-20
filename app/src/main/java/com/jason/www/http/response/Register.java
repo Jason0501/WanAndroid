@@ -7,4 +7,8 @@ package com.jason.www.http.response;
  * @description:
  */
 public class Register {
+    @Override
+    public String toString() {
+        return "Register{}";
+    }
 }

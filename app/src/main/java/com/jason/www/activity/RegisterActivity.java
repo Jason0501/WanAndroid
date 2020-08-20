@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseActivity;
@@ -97,7 +96,6 @@ public class RegisterActivity extends BaseActivity {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().register(username, password, repassword);
             }
-        }, new TypeToken<BaseResponse<Register>>() {
-        }.getType());
+        }, Register.class);
     }
 }

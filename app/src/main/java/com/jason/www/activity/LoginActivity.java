@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
 import com.jason.www.http.BaseHttpCallback;
@@ -91,7 +90,6 @@ public class LoginActivity extends BaseActivity {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().login(username, password);
             }
-        }, new TypeToken<BaseResponse<Login>>() {
-        }.getType());
+        }, Login.class);
     }
 }

@@ -17,6 +17,9 @@ import retrofit2.http.Path;
 public interface RetrofitUrl {
     String BASE_URL = Urls.BASE_SERVER_URL;
 
+    @GET("wxarticle/chapters/json")
+    Call<ResponseBody> getWeChatPublicAccounts();
+
     @FormUrlEncoded
     @POST("user/register")
     Call<ResponseBody> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
