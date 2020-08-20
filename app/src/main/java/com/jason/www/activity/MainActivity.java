@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void fail(int code, String msg) {
-
+                Log.d("MainActivity", msg);
             }
 
             @Override
