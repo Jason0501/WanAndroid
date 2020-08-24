@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseActivity;
@@ -75,7 +76,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void register(String username, String password, String repassword) {
-        RetrofitHelper.enqueue2(new BaseHttpCallback<Register>() {
+        RetrofitHelper.enqueue2(new BaseHttpCallback<BaseResponse<Register>>() {
             @Override
             public void success(BaseResponse<Register> response) {
                 if (response.isOk()) {
@@ -96,6 +97,7 @@ public class RegisterActivity extends BaseActivity {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().register(username, password, repassword);
             }
-        }, Register.class);
+        }, new TypeToken<BaseResponse<Register>>() {
+        }.getType());
     }
 }

@@ -1,10 +1,14 @@
 package com.jason.www.activity;
 
+import android.Manifest;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.base.BaseActivity;
@@ -15,6 +19,7 @@ import com.jason.www.http.response.WeChatPublicAccount;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.utils.IntentUtils;
 import com.jason.www.utils.SystemUtils;
+import com.jason.www.utils.ViewUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
@@ -27,15 +32,31 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.OnClick;
 import okhttp3.ResponseBody;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 import retrofit2.Call;
 
+@RuntimePermissions
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.textview_title)
+    TextView textviewTitle;
+    @BindView(R.id.imageview)
+    ImageView imageview;
+    @BindView(R.id.textview_username)
+    TextView textviewUsername;
+    @BindView(R.id.textview_userinfo)
+    TextView textviewUserinfo;
     private HomeAdapter homeAdapter;
     private boolean isRefresh;
     private int page;
@@ -77,12 +98,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
 //        smartRefreshLayout.autoRefresh();
-//        requestHomeArticle();
-        requestWeChatPublicAccounts();
+        requestHomeArticle();
+//        requestWeChatPublicAccounts();
     }
 
     private void requestWeChatPublicAccounts() {
-        RetrofitHelper.enqueue2(new SmartHttpCallback<List<WeChatPublicAccount>>() {
+        RetrofitHelper.enqueue2(new SmartHttpCallback<BaseResponse<List<WeChatPublicAccount>>>() {
             @Override
             public void success(BaseResponse<List<WeChatPublicAccount>> response) {
                 if (response.isOk()) {
@@ -100,13 +121,14 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public Call<ResponseBody> getApi() {
-                return null;
+                return RetrofitHelper.getApi().getWeChatPublicAccounts();
             }
-        }, List.class);
+        }, new TypeToken<BaseResponse<List<HomeArticleBody.HomeArticle>>>() {
+        }.getType());
     }
 
     private void requestHomeArticle() {
-        RetrofitHelper.enqueue2(new SmartHttpCallback<HomeArticleBody>() {
+        RetrofitHelper.enqueue2(new SmartHttpCallback<BaseResponse<HomeArticleBody>>() {
             @Override
             public void success(BaseResponse<HomeArticleBody> response) {
                 if (response.isOk()) {
@@ -135,7 +157,8 @@ public class MainActivity extends BaseActivity {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().getHomeArticles(page++);
             }
-        }, HomeArticleBody.class);
+        }, new TypeToken<BaseResponse<HomeArticleBody>>() {
+        }.getType());
     }
 
     @Override
@@ -155,5 +178,44 @@ public class MainActivity extends BaseActivity {
             showToast("再按一次退出");
             firstTimeMillis = t;
         }
+    }
+
+    @OnClick(R.id.textview_title)
+    public void onViewClicked() {
+        MainActivityPermissionsDispatcher.onStoragePermissionGrantedWithPermissionCheck(this);
+    }
+
+    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void onStoragePermissionGranted() {
+        Log.d("MainActivity", "onStoragePermissionGranted");
+        CharSequence text = textviewUsername.getText();
+        textviewUsername.setText("******");
+        CharSequence title = textviewTitle.getText();
+        textviewTitle.setText("************");
+        ViewUtils.screenShot(getWindow().getDecorView());
+        textviewUsername.setText(text);
+        textviewTitle.setText(title);
+        showToast("截图已保存至相册");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @OnShowRationale({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void onShowStoragePermission(final PermissionRequest request) {
+        Log.d("MainActivity", "onShowStoragePermission");
+    }
+
+    @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void onStoragePermissionDenied() {
+        Log.d("MainActivity", "onStoragePermissionDenied");
+    }
+
+    @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void onStorageNeverAskAgain() {
+        Log.d("MainActivity", "onStorageNeverAskAgain");
     }
 }

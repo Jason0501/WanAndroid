@@ -5,6 +5,7 @@ import com.jason.www.utils.GsonUtils;
 import com.jason.www.utils.LogUtils;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -70,7 +71,7 @@ public class RetrofitHelper {
      *
      * @param callback
      */
-    public static <T> void enqueue(BaseHttpCallback<T> callback) {
+    public static <T> void enqueue(BaseHttpCallback<T> callback, Type type) {
         if (callback == null) {
             throw new NullPointerException("callback must not be null");
         }
@@ -83,8 +84,7 @@ public class RetrofitHelper {
                         try {
                             String content = response.body().string();
                             LogUtils.i("onResponse:" + content);
-                            ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl(BaseResponse.class, new Class[]{BaseResponse.class});
-                            BaseResponse<T> result = GsonUtils.getGson().fromJson(content, parameterizedType);
+                            T result = GsonUtils.getGson().fromJson(content, type);
                             callback.success(result);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -97,7 +97,7 @@ public class RetrofitHelper {
                     }
                 }
                 if (callback != null && callback instanceof SmartHttpCallback) {
-                    ((SmartHttpCallback) callback).finish();
+                    ((SmartHttpCallback<T>) callback).finish();
                 }
             }
 
@@ -108,24 +108,24 @@ public class RetrofitHelper {
                     callback.fail(BaseResponse.FAIL, t.getMessage());
                 }
                 if (callback != null && callback instanceof SmartHttpCallback) {
-                    ((SmartHttpCallback) callback).finish();
+                    ((SmartHttpCallback<T>) callback).finish();
                 }
             }
         });
     }
 
-    public static <T> void enqueue2(BaseHttpCallback<T> callback, Class clazz) {
+    public static <T> void enqueue2(BaseHttpCallback<T> callback, Type type) {
         if (callback == null) {
             throw new NullPointerException("callback must not be null");
         }
         Call<ResponseBody> call = callback.getApi();
-        call.enqueue(new HttpCallback<T>(clazz) {
+        call.enqueue(new HttpCallback<T>(type) {
             @Override
-            public void success(BaseResponse<T> response) {
+            public void success(T response) {
                 if (callback != null) {
                     callback.success(response);
                     if (callback instanceof SmartHttpCallback) {
-                        ((SmartHttpCallback) callback).finish();
+                        ((SmartHttpCallback<T>) callback).finish();
                     }
                 }
             }
@@ -136,7 +136,7 @@ public class RetrofitHelper {
                 if (callback != null) {
                     callback.fail(BaseResponse.FAIL, t.getMessage());
                     if (callback instanceof SmartHttpCallback) {
-                        ((SmartHttpCallback) callback).finish();
+                        ((SmartHttpCallback<T>) callback).finish();
                     }
                 }
             }

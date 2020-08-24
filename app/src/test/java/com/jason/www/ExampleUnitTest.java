@@ -1,5 +1,7 @@
 package com.jason.www;
 
+import com.jason.www.utils.KBUtils;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,5 +19,7 @@ public class ExampleUnitTest {
 
     @Test
     public void main() {
+        String convert = KBUtils.convert(685);
+        System.out.println(convert);
     }
 }
