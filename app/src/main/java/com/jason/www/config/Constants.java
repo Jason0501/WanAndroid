@@ -7,7 +7,13 @@ package com.jason.www.config;
  * @description:
  */
 public interface Constants {
+    String SP_NAME = "wanandroid";
+
     interface IntentKey {
-        String WEBVIEW_URL = "WEBVIEW_URL";
+        String WEBVIEW_URL = "webview_url";
+    }
+
+    interface SharedPrefferenceKey {
+        String IS_LOGIN = "is_login";
     }
 }

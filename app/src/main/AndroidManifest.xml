@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".base.MyApplication"
+        android:name=".base.RunApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,10 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".activity.MainActivity" />
         <activity
-            android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan|stateVisible">
+            android:name=".activity.SplashActivity"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +29,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/activity_main" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/activity_login"
+            android:windowSoftInputMode="adjustPan|stateVisible" />
+        <activity
             android:name=".activity.RegisterActivity"
+            android:label="@string/activity_register"
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity android:name=".activity.WebViewActivity" />
     </application>

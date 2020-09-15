@@ -20,6 +20,9 @@ public interface RetrofitUrl {
     @GET("wxarticle/chapters/json")
     Call<ResponseBody> getWeChatPublicAccounts();
 
+    @GET("banner/json")
+    Call<ResponseBody> getHomeBanner();
+
     @FormUrlEncoded
     @POST("user/register")
     Call<ResponseBody> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);

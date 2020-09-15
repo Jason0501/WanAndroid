@@ -2,7 +2,7 @@ package com.jason.www.utils;
 
 import android.annotation.SuppressLint;
 
-import com.jason.www.base.MyApplication;
+import com.jason.www.config.AppData;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -604,7 +604,7 @@ public class FileUtils {
     public static String openTxtFromAssets(String fileName) {
         InputStream is = null;
         try {
-            is = MyApplication.getInstance().getResources().getAssets().open(fileName);
+            is = AppData.getContext().getResources().getAssets().open(fileName);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             int len = -1;
             byte[] buffer = new byte[1024];

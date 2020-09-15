@@ -1,10 +1,9 @@
 package com.jason.www.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import com.jason.www.utils.LogUtils;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +17,10 @@ import butterknife.Unbinder;
  * @description:
  */
 public abstract class BaseActivity extends AppCompatActivity {
-
     private Unbinder unbinder;
     protected Context mContext;
     protected AppCompatActivity mActivity;
+    private Toast toast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,24 +33,32 @@ public abstract class BaseActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         initView();
         initData();
+        initEvent();
     }
 
     protected abstract void initView();
 
     protected abstract void initData();
 
+    protected void initEvent() {
+    }
+
     protected void beforeSetContentView() {
     }
 
     protected void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    protected void showLog(String log) {
-        LogUtils.i(log);
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     protected abstract int getLayoutResId();
+
+    protected void startActivity(Class targetActivity) {
+        startActivity(new Intent(mContext, targetActivity));
+    }
 
     @Override
     protected void onDestroy() {

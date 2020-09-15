@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
+import com.jason.www.config.Accounts;
 import com.jason.www.http.BaseHttpCallback;
 import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.response.Login;
@@ -75,6 +76,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void success(BaseResponse<Login> response) {
                 if (response.isOk()) {
+                    Accounts.setIsLogin(true);
                     startActivity(new Intent(mContext, MainActivity.class));
                     mActivity.finish();
                 } else {
