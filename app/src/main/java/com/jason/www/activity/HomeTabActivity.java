@@ -9,7 +9,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.jason.www.R;
 import com.jason.www.adapter.BasePagerAdapter;
 import com.jason.www.base.BaseActivity;
+import com.jason.www.fragment.FrequentWebSiteFragment;
 import com.jason.www.fragment.HomeFragment;
+import com.jason.www.fragment.QuestionFragment;
 import com.jason.www.utils.SystemUtils;
 
 import java.util.ArrayList;
@@ -39,17 +41,19 @@ public class HomeTabActivity extends BaseActivity {
         String[] titles = getResources().getStringArray(R.array.home_tab_title);
         mTitleList = Arrays.asList(titles);
         mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new HomeFragment());
+        mFragmentList.add(new QuestionFragment());
+        mFragmentList.add(new FrequentWebSiteFragment());
+        mFragmentList.add(new FrequentWebSiteFragment());
         viewpager.setOffscreenPageLimit(mFragmentList.size() - 1);
-        BasePagerAdapter adapter = new BasePagerAdapter(mActivity.getSupportFragmentManager(), mFragmentList, mTitleList);
+        BasePagerAdapter adapter = new BasePagerAdapter(mActivity.getSupportFragmentManager(),
+                mFragmentList, mTitleList);
         viewpager.setAdapter(adapter);
         viewpager.setCurrentItem(0);
         tabLayout.setupWithViewPager(viewpager);
         int size = mFragmentList.size();
         for (int i = 0; i < size; i++) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.item_tab_indicator_layout, null);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.item_tab_indicator_layout,
+                    null);
             TextView textview = view.findViewById(R.id.textview_tab_home);
             ImageView imageview = view.findViewById(R.id.imageview_tab_home);
             switch (i) {

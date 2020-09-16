@@ -52,7 +52,8 @@ public class RetrofitHelper {
     private static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //忽略https证书验证，允许抓包
-        builder.sslSocketFactory(SSLFactory.createSSLSocketFactory(), new SSLFactory.TrustAllManager());
+        builder.sslSocketFactory(SSLFactory.createSSLSocketFactory(),
+                new SSLFactory.TrustAllManager());
         builder.hostnameVerifier(new SSLFactory.TrustAllHostnameVerifier());
         builder.callTimeout(7000, TimeUnit.MILLISECONDS);
         OkHttpClient client = builder.build();

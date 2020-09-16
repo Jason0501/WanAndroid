@@ -1,6 +1,5 @@
-package com.jason.www.fragment;
+package com.jason.www.base;
 
-import com.jason.www.base.BaseFragment;
 import com.jason.www.mvp.base.IBasePresenter;
 import com.jason.www.mvp.base.IBaseView;
 

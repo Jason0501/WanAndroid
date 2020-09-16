@@ -3,27 +3,26 @@ package com.jason.www.mvp.model;
 import com.google.gson.reflect.TypeToken;
 import com.jason.www.http.BaseHttpCallback;
 import com.jason.www.http.RetrofitHelper;
-import com.jason.www.http.response.Register;
+import com.jason.www.http.response.Question;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.mvp.callback.IRequestCallback;
-import com.jason.www.mvp.contract.RegisterContract;
+import com.jason.www.mvp.contract.QuestionContract;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 /**
- * @author：Jason
- * @date：2020/9/16 12:25
- * @email：1129847330@qq.com
+ * @author：动脑学院-Zee老师
+ * @date：2020/9/16 22:05
+ * @email：575569745@qq.com
  * @description:
  */
-public class RegisterModel extends RegisterContract.Model {
+public class QuestionModel extends QuestionContract.Model {
     @Override
-    public void register(String username, String password, String rePassword,
-                         IRequestCallback callback) {
-        RetrofitHelper.enqueue(new BaseHttpCallback<BaseResponse<Register>>() {
+    public void getQuestion(int page, IRequestCallback callback) {
+        RetrofitHelper.enqueue(new BaseHttpCallback<BaseResponse<Question>>() {
             @Override
-            public void success(BaseResponse<Register> response) {
+            public void success(BaseResponse<Question> response) {
                 if (response.isOk()) {
                     callback.success(response);
                 } else {
@@ -38,9 +37,9 @@ public class RegisterModel extends RegisterContract.Model {
 
             @Override
             public Call<ResponseBody> getApi() {
-                return RetrofitHelper.getApi().register(username, password, rePassword);
+                return RetrofitHelper.getApi().getQuestion(page);
             }
-        }, new TypeToken<BaseResponse<Register>>() {
+        }, new TypeToken<BaseResponse<Question>>() {
         }.getType());
     }
 }

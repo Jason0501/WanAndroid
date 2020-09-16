@@ -39,7 +39,9 @@
             android:name=".activity.RegisterActivity"
             android:label="@string/activity_register"
             android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity android:name=".activity.WebViewActivity" />
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:theme="@style/FullScreenTheme" />
     </application>
 
 </manifest>

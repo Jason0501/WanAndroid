@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.adapter.HomeBannerAdapter;
+import com.jason.www.base.BaseMvpFragment;
 import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.http.response.HomeBanner;
 import com.jason.www.mvp.contract.MainContract;
@@ -44,8 +45,8 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     SmartRefreshLayout smartRefreshLayout;
     Banner mBanner;
     private HomeAdapter mHomeAdapter;
-    private boolean isRefresh;
-    private int page;
+    private boolean mIsRefresh;
+    private int mPage;
 
     @Override
     protected void initView(View decorView) {
@@ -56,7 +57,8 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     private void initRecyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(manager);
-        recyclerview.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
+        recyclerview.addItemDecoration(new DividerItemDecoration(mContext,
+                LinearLayoutManager.VERTICAL));
         mHomeAdapter = new HomeAdapter();
         initBanner();
         recyclerview.setAdapter(mHomeAdapter);
@@ -67,7 +69,8 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
         super.initEvent();
         mHomeAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view,
+                                    int position) {
                 HomeArticleBody.HomeArticle homeArticle = mHomeAdapter.getData().get(position);
                 IntentUtils.goToWebViewActivity(homeArticle.getLink());
             }
@@ -75,10 +78,10 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                isRefresh = true;
-                page = 0;
+                mIsRefresh = true;
+                mPage = 0;
                 getPresenter().getBannerHome();
-                getPresenter().getHomeArticles(page);
+                getPresenter().getHomeArticles(mPage);
             }
         });
 
@@ -102,7 +105,8 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
         View view = LayoutInflater.from(mContext).inflate(R.layout.header_home, null);
         mBanner = view.findViewById(R.id.banner_home);
         int width = DisplayUtils.realWidth();
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mBanner.getLayoutParams();
+        FrameLayout.LayoutParams layoutParams =
+                (FrameLayout.LayoutParams) mBanner.getLayoutParams();
         layoutParams.width = width;
         layoutParams.height = width * 5 / 9;
         mBanner.setLayoutParams(layoutParams);
@@ -114,14 +118,14 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     }
 
     private void loadMoreArticle() {
-        getPresenter().getHomeArticles(++page);
+        getPresenter().getHomeArticles(++mPage);
     }
 
     @Override
     protected void initData() {
         super.initData();
         getPresenter().getBannerHome();
-        getPresenter().getHomeArticles(page);
+        getPresenter().getHomeArticles(mPage);
     }
 
     @Override
@@ -133,11 +137,12 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     public void successGetHomeArticles(HomeArticleBody homeArticleBody) {
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
-        if (isRefresh) {
-            mHomeAdapter.getData().clear();
+        if (mIsRefresh) {
+            mHomeAdapter.setList(homeArticleBody.datas);
+        } else {
+            mHomeAdapter.addData(homeArticleBody.getDatas());
         }
-        mHomeAdapter.addData(homeArticleBody.getDatas());
-        isRefresh = false;
+        mIsRefresh = false;
     }
 
     @Override

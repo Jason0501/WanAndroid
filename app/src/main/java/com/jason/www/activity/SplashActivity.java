@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
 import com.jason.www.config.Accounts;
-import com.jason.www.utils.glide.GlideUtils;
 
 import butterknife.BindView;
 
@@ -17,7 +16,6 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initView(View decorView) {
         super.initView(decorView);
-        GlideUtils.loadImage(R.drawable.splash, imageView);
         imageView.postDelayed(new Runnable() {
             @Override
             public void run() {

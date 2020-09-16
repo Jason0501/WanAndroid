@@ -14,7 +14,7 @@ import com.jason.www.mvp.callback.IRequestCallback;
  */
 public interface RegisterContract {
     abstract class Model extends IBaseModel {
-        public abstract IBaseModel register(String username, String password, String rePassword, IRequestCallback callback);
+        public abstract void register(String username, String password, String rePassword, IRequestCallback callback);
     }
 
     interface View extends IBaseView {
