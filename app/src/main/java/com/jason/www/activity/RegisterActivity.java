@@ -5,21 +5,17 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
 import com.jason.www.base.ActivityStackManager;
-import com.jason.www.base.BaseActivity;
-import com.jason.www.http.BaseHttpCallback;
-import com.jason.www.http.RetrofitHelper;
+import com.jason.www.base.BaseMvpActivity;
+import com.jason.www.contract.RegisterContract;
 import com.jason.www.http.response.Register;
-import com.jason.www.http.response.base.BaseResponse;
+import com.jason.www.presenter.RegisterPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> implements RegisterContract.View {
     @BindView(R.id.edittext_username)
     EditText edittextUsername;
     @BindView(R.id.edittext_password)
@@ -30,6 +26,11 @@ public class RegisterActivity extends BaseActivity {
     Button btnRegist;
 
     @Override
+    protected RegisterPresenter createPresenter() {
+        return new RegisterPresenter();
+    }
+
+    @Override
     protected void initView() {
         edittextUsername.setText("不良少年");
         edittextPassword.setText("123456");
@@ -38,17 +39,11 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_register;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     @OnClick(R.id.btn_regist)
@@ -72,32 +67,13 @@ public class RegisterActivity extends BaseActivity {
             showToast("两次密码输入不一样");
             return;
         }
-        register(username, password, repassword);
+        getPresenter().register(username, password, repassword);
     }
 
-    private void register(String username, String password, String repassword) {
-        RetrofitHelper.enqueue2(new BaseHttpCallback<BaseResponse<Register>>() {
-            @Override
-            public void success(BaseResponse<Register> response) {
-                if (response.isOk()) {
-                    mActivity.finish();
-                    startActivity(new Intent(mContext, MainActivity.class));
-                    ActivityStackManager.getInstance().finishActivity(LoginActivity.class);
-                } else {
-                    showToast(response.errorMsg);
-                }
-            }
-
-            @Override
-            public void fail(int code, String msg) {
-                showToast(msg);
-            }
-
-            @Override
-            public Call<ResponseBody> getApi() {
-                return RetrofitHelper.getApi().register(username, password, repassword);
-            }
-        }, new TypeToken<BaseResponse<Register>>() {
-        }.getType());
+    @Override
+    public void successRegister(Register register) {
+        startActivity(new Intent(mContext, MainActivity.class));
+        finish();
+        ActivityStackManager.getInstance().finishActivity(LoginActivity.class);
     }
 }

@@ -1,18 +1,13 @@
 package com.jason.www.http;
 
 import com.jason.www.http.response.base.BaseResponse;
-import com.jason.www.utils.GsonUtils;
-import com.jason.www.utils.LogUtils;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -66,55 +61,7 @@ public class RetrofitHelper {
         return getRetrofit().create(RetrofitUrl.class);
     }
 
-    /**
-     * 异步请求
-     *
-     * @param callback
-     */
     public static <T> void enqueue(BaseHttpCallback<T> callback, Type type) {
-        if (callback == null) {
-            throw new NullPointerException("callback must not be null");
-        }
-        Call<ResponseBody> call = callback.getApi();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    if (callback != null) {
-                        try {
-                            String content = response.body().string();
-                            LogUtils.i("onResponse:" + content);
-                            T result = GsonUtils.getGson().fromJson(content, type);
-                            callback.success(result);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else {
-                    LogUtils.i("onResponse->请求失败:" + response.message());
-                    if (callback != null) {
-                        callback.fail(response.code(), response.message());
-                    }
-                }
-                if (callback != null && callback instanceof SmartHttpCallback) {
-                    ((SmartHttpCallback<T>) callback).finish();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                LogUtils.i("onFailure->请求失败：" + t.getMessage());
-                if (callback != null) {
-                    callback.fail(BaseResponse.FAIL, t.getMessage());
-                }
-                if (callback != null && callback instanceof SmartHttpCallback) {
-                    ((SmartHttpCallback<T>) callback).finish();
-                }
-            }
-        });
-    }
-
-    public static <T> void enqueue2(BaseHttpCallback<T> callback, Type type) {
         if (callback == null) {
             throw new NullPointerException("callback must not be null");
         }
@@ -144,8 +91,5 @@ public class RetrofitHelper {
     }
 
     public void cancel() {
-//        if (call != null && !call.isCanceled()) {
-//            call.cancel();
-//        }
     }
 }

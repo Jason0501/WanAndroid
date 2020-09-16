@@ -6,21 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.reflect.TypeToken;
 import com.jason.www.R;
-import com.jason.www.base.BaseActivity;
+import com.jason.www.base.BaseMvpActivity;
 import com.jason.www.config.Accounts;
-import com.jason.www.http.BaseHttpCallback;
-import com.jason.www.http.RetrofitHelper;
+import com.jason.www.contract.LoginContract;
 import com.jason.www.http.response.Login;
-import com.jason.www.http.response.base.BaseResponse;
+import com.jason.www.presenter.LoginPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements LoginContract.View {
 
     @BindView(R.id.edittext_username)
     EditText edittextUsername;
@@ -30,6 +26,11 @@ public class LoginActivity extends BaseActivity {
     Button btnLogin;
 
     @Override
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter();
+    }
+
+    @Override
     protected void initView() {
         edittextUsername.setText("不良少年");
         edittextPassword.setText("123456");
@@ -37,7 +38,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
     }
 
     @Override
@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
                     showToast("请输入密码");
                     return;
                 }
-                login(username, password);
+                getPresenter().login(username, password);
                 break;
         }
     }
@@ -71,29 +71,10 @@ public class LoginActivity extends BaseActivity {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    private void login(String username, String password) {
-        RetrofitHelper.enqueue2(new BaseHttpCallback<BaseResponse<Login>>() {
-            @Override
-            public void success(BaseResponse<Login> response) {
-                if (response.isOk()) {
-                    Accounts.setIsLogin(true);
-                    startActivity(new Intent(mContext, MainActivity.class));
-                    mActivity.finish();
-                } else {
-                    showToast(response.errorMsg);
-                }
-            }
-
-            @Override
-            public void fail(int code, String msg) {
-                showToast(msg);
-            }
-
-            @Override
-            public Call<ResponseBody> getApi() {
-                return RetrofitHelper.getApi().login(username, password);
-            }
-        }, new TypeToken<BaseResponse<Login>>() {
-        }.getType());
+    @Override
+    public void successLogin(Login login) {
+        Accounts.setIsLogin(true);
+        startActivity(new Intent(mContext, MainActivity.class));
+        mActivity.finish();
     }
 }
