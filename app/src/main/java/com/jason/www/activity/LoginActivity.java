@@ -31,13 +31,10 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
     @Override
-    protected void initView() {
+    protected void initView(View decorView) {
+        super.initView(decorView);
         edittextUsername.setText("不良少年");
         edittextPassword.setText("123456");
-    }
-
-    @Override
-    protected void initData() {
     }
 
     @Override
@@ -74,7 +71,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void successLogin(Login login) {
         Accounts.setIsLogin(true);
-        startActivity(new Intent(mContext, MainActivity.class));
+        startActivity(new Intent(mContext, HomeTabActivity.class));
         mActivity.finish();
     }
 }

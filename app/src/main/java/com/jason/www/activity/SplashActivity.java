@@ -1,5 +1,6 @@
 package com.jason.www.activity;
 
+import android.view.View;
 import android.widget.ImageView;
 
 import com.jason.www.R;
@@ -14,24 +15,20 @@ public class SplashActivity extends BaseActivity {
     ImageView imageView;
 
     @Override
-    protected void initView() {
+    protected void initView(View decorView) {
+        super.initView(decorView);
         GlideUtils.loadImage(R.drawable.splash, imageView);
         imageView.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (Accounts.getIsLogin()) {
-                    startActivity(MainActivity.class);
+                    startActivity(HomeTabActivity.class);
                 } else {
                     startActivity(LoginActivity.class);
                 }
                 finish();
             }
         }, 2000);
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     @Override

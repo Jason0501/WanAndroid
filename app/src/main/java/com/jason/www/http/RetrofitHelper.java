@@ -19,6 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitHelper {
     private static Retrofit retrofit;
+//    private static SparseArray<Call> array;
 
     private RetrofitHelper() {
     }
@@ -28,6 +29,7 @@ public class RetrofitHelper {
             synchronized (RetrofitHelper.class) {
                 if (retrofit == null) {
                     retrofit = initRetrofit();
+//                    array = new SparseArray<>();
                 }
             }
         }
@@ -66,6 +68,7 @@ public class RetrofitHelper {
             throw new NullPointerException("callback must not be null");
         }
         Call<ResponseBody> call = callback.getApi();
+//        array.put(retrofit.baseUrl().url().getPath().hashCode(), call);
         call.enqueue(new HttpCallback<T>(type) {
             @Override
             public void success(T response) {

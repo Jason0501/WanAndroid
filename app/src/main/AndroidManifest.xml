@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.HomeTabActivity"
             android:label="@string/activity_main" />
         <activity
             android:name=".activity.LoginActivity"

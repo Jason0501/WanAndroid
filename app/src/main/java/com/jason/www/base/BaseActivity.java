@@ -3,6 +3,7 @@ package com.jason.www.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ActivityStackManager.getInstance().addActivity(this);
         unbinder = ButterKnife.bind(this);
         initMvp();
-        initView();
+        initView(getWindow().getDecorView());
         initData();
         initEvent();
     }
@@ -40,9 +41,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initMvp() {
     }
 
-    protected abstract void initView();
+    protected void initView(View decorView) {
+    }
 
-    protected abstract void initData();
+    protected void initData() {
+    }
 
     protected void initEvent() {
     }

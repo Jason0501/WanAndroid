@@ -2,14 +2,16 @@ package com.jason.www.activity;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.jason.www.R;
 import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseMvpActivity;
-import com.jason.www.mvp.contract.RegisterContract;
+import com.jason.www.config.Accounts;
 import com.jason.www.http.response.Register;
+import com.jason.www.mvp.contract.RegisterContract;
 import com.jason.www.mvp.presenter.RegisterPresenter;
 
 import butterknife.BindView;
@@ -31,14 +33,11 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     }
 
     @Override
-    protected void initView() {
+    protected void initView(View decorView) {
+        super.initView(decorView);
         edittextUsername.setText("不良少年");
         edittextPassword.setText("123456");
         edittextRepassword.setText(edittextPassword.getText());
-    }
-
-    @Override
-    protected void initData() {
     }
 
     @Override
@@ -72,7 +71,8 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void successRegister(Register register) {
-        startActivity(new Intent(mContext, MainActivity.class));
+        Accounts.setIsLogin(true);
+        startActivity(new Intent(mContext, HomeTabActivity.class));
         finish();
         ActivityStackManager.getInstance().finishActivity(LoginActivity.class);
     }

@@ -1,4 +1,4 @@
-package com.jason.www.activity;
+package com.jason.www.fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +9,12 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.adapter.HomeBannerAdapter;
-import com.jason.www.base.BaseMvpActivity;
-import com.jason.www.mvp.contract.MainContract;
 import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.http.response.HomeBanner;
+import com.jason.www.mvp.contract.MainContract;
 import com.jason.www.mvp.presenter.MainPresenter;
 import com.jason.www.utils.DisplayUtils;
 import com.jason.www.utils.IntentUtils;
-import com.jason.www.utils.SystemUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
@@ -33,7 +31,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View {
+/**
+ * @author：Jason
+ * @date：2020/9/16 16:45
+ * @email：1129847330@qq.com
+ * @description:
+ */
+public class HomeFragment extends BaseMvpFragment<MainPresenter> implements MainContract.View {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
@@ -44,12 +48,8 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     private int page;
 
     @Override
-    protected MainPresenter createPresenter() {
-        return new MainPresenter();
-    }
-
-    @Override
-    protected void initView() {
+    protected void initView(View decorView) {
+        super.initView(decorView);
         initRecyclerView();
     }
 
@@ -88,6 +88,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                 loadMoreArticle();
             }
         });
+
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(Object data, int position) {
@@ -118,27 +119,9 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     @Override
     protected void initData() {
+        super.initData();
         getPresenter().getBannerHome();
         getPresenter().getHomeArticles(page);
-    }
-
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.activity_main;
-    }
-
-    private long firstTimeMillis;
-
-    @Override
-    public void onBackPressed() {
-        long t = System.currentTimeMillis();
-        if (t - firstTimeMillis <= 1500) {
-            super.onBackPressed();
-            SystemUtils.killMySelfProcess();
-        } else {
-            showToast("再按一次退出");
-            firstTimeMillis = t;
-        }
     }
 
     @Override
@@ -155,5 +138,15 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         }
         mHomeAdapter.addData(homeArticleBody.getDatas());
         isRefresh = false;
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 }

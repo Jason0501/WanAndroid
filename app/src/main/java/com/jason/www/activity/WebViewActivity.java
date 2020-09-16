@@ -31,12 +31,14 @@ public class WebViewActivity extends BaseActivity {
     private String mUrl;
 
     @Override
-    protected void initView() {
+    protected void initView(View decorView) {
+        super.initView(decorView);
         initWebView();
     }
 
     @Override
     protected void initData() {
+        super.initData();
         Intent intent = getIntent();
         mUrl = intent.getStringExtra(Constants.IntentKey.WEBVIEW_URL);
         if (!TextUtils.isEmpty(mUrl)) {
