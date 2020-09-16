@@ -1,10 +1,9 @@
 package com.jason.www.activity;
 
-import android.Manifest;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -39,22 +38,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import okhttp3.ResponseBody;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
 import retrofit2.Call;
 
-@RuntimePermissions
 public class MainActivity extends BaseActivity {
-
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartRefreshLayout;
-    //    @BindView(R.id.banner_home)
     Banner mBanner;
     private HomeAdapter mHomeAdapter;
     private boolean isRefresh;
@@ -63,7 +53,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         initRecyclerView();
-        initBanner();
     }
 
     private void initRecyclerView() {
@@ -71,6 +60,7 @@ public class MainActivity extends BaseActivity {
         recyclerview.setLayoutManager(manager);
         recyclerview.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
         mHomeAdapter = new HomeAdapter();
+        initBanner();
         recyclerview.setAdapter(mHomeAdapter);
     }
 
@@ -110,14 +100,18 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initBanner() {
-        mBanner = (Banner) LayoutInflater.from(mContext).inflate(R.layout.header_home, null);
-        int width = DisplayUtils.width();
-        mBanner.setLayoutParams(new ViewGroup.LayoutParams(width, width * 5 / 9));
+        View view = LayoutInflater.from(mContext).inflate(R.layout.header_home, null);
+        mBanner = view.findViewById(R.id.banner_home);
+        int width = DisplayUtils.realWidth();
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mBanner.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height = width * 5 / 9;
+        mBanner.setLayoutParams(layoutParams);
         HomeBannerAdapter bannerAdapter = new HomeBannerAdapter();
         mBanner.setAdapter(bannerAdapter);
         mBanner.addBannerLifecycleObserver(this);
         mBanner.setIndicator(new CircleIndicator(mContext), true);
-        mHomeAdapter.addHeaderView(mBanner);
+        mHomeAdapter.addHeaderView(view);
     }
 
     private void loadMoreArticle() {
@@ -135,8 +129,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void success(BaseResponse<List<HomeBanner>> response) {
                 if (response.isOk() && CollectionUtils.isNotEmpty(response.data)) {
-                    mBanner.getAdapter().setDatas(response.data);
-                    mBanner.start();
+                    mBanner.setDatas(response.data);
                 }
             }
 
@@ -228,35 +221,5 @@ public class MainActivity extends BaseActivity {
             showToast("再按一次退出");
             firstTimeMillis = t;
         }
-    }
-
-    public void requestPermission() {
-        MainActivityPermissionsDispatcher.onStoragePermissionGrantedWithPermissionCheck(this);
-    }
-
-    @NeedsPermission({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onStoragePermissionGranted() {
-        Log.d("MainActivity", "onStoragePermissionGranted");
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
-    }
-
-    @OnShowRationale({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onShowStoragePermission(final PermissionRequest request) {
-        Log.d("MainActivity", "onShowStoragePermission");
-    }
-
-    @OnPermissionDenied({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onStoragePermissionDenied() {
-        Log.d("MainActivity", "onStoragePermissionDenied");
-    }
-
-    @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onStorageNeverAskAgain() {
-        Log.d("MainActivity", "onStorageNeverAskAgain");
     }
 }

@@ -1,7 +1,9 @@
 package com.jason.www.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -21,6 +23,7 @@ import butterknife.BindView;
 import static android.view.KeyEvent.KEYCODE_BACK;
 
 public class WebViewActivity extends BaseActivity {
+    private static final String TAG = "WebViewActivity";
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.progressbar)
@@ -48,7 +51,7 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);  //支持js
         webSettings.setUseWideViewPort(true);  //将图片调整到适合webview的大小
         webSettings.setSupportZoom(true);  //支持缩放
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); //支持内容重      新布局
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
         webSettings.supportMultipleWindows();  //多窗口
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);  //关闭webview中缓存
         webSettings.setAllowFileAccess(true);  //设置可以访问文件
@@ -70,26 +73,37 @@ public class WebViewActivity extends BaseActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //使用WebView加载显示url
-                view.loadUrl(url);
-                //返回true
-                return true;
+                WebView.HitTestResult hit = view.getHitTestResult();
+                //hit.getExtra()为null或者hit.getType() == 0都表示即将加载的URL会发生重定向，需要做拦截处理
+                if (TextUtils.isEmpty(hit.getExtra()) || hit.getType() == 0) {
+                    //通过判断开头协议就可解决大部分重定向问题了，有另外的需求可以在此判断下操作
+                    Log.d(TAG, "--------------------------------------------------");
+                    Log.d(TAG, "getType()：" + hit.getType());
+                    Log.d(TAG, "getExtra()：" + hit.getExtra());
+                    Log.d(TAG, "getUrl()：" + view.getUrl());
+                    Log.d(TAG, "getOriginalUrl()：" + view.getOriginalUrl());
+                    Log.d(TAG, "URL：" + url);
+                }
+                if (url.startsWith("http://") || url.startsWith("https://")) {
+                    //加载的url是http/https协议地址
+                    view.loadUrl(url);
+                    //返回false表示此url默认由系统处理,url未加载完成，会继续往下走
+                    return false;
+                } else {
+                    //加载的url是自定义协议地址，启动系统浏览器打开
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        mContext.startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                }
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-//                if (type == TYPE_URL) {
-//                    String clipboardContent = SystemUtils.getClipboardContent();
-                //自动将单号填充进去
-//                    String js = String.format("javascript:document.getElementsByTagName('input')[0].value='%s';", clipboardContent);
-//                    webView.evaluateJavascript(js, new ValueCallback<String>() {
-//                        @Override
-//                        public void onReceiveValue(String value) {
-//                            Log.d("WebViewActivity", "onReceiveValue:" + value);
-//                        }
-//                    });
-//                }
             }
         });
         //进度监听

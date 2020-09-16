@@ -23,4 +23,8 @@
     <dimen name="textsize_large">18sp</dimen>
     <dimen name="textsize_xlarge">20sp</dimen>
     <dimen name="textsize_xxlarge">22sp</dimen>
+
+    <dimen name="radius_normal">5dp</dimen>
+    <dimen name="radius_small">3dp</dimen>
+    <dimen name="radius_large">7dp</dimen>
 </resources>
