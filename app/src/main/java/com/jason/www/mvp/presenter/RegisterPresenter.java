@@ -1,10 +1,10 @@
-package com.jason.www.presenter;
+package com.jason.www.mvp.presenter;
 
-import com.jason.www.base.IBaseModel;
-import com.jason.www.contract.RegisterContract;
 import com.jason.www.http.response.Register;
 import com.jason.www.http.response.base.BaseResponse;
-import com.jason.www.model.RegisterModel;
+import com.jason.www.mvp.callback.IRequestCallback;
+import com.jason.www.mvp.contract.RegisterContract;
+import com.jason.www.mvp.model.RegisterModel;
 
 /**
  * @author：Jason
@@ -15,7 +15,7 @@ import com.jason.www.model.RegisterModel;
 public class RegisterPresenter extends RegisterContract.Presenter {
     @Override
     public void register(String username, String password, String rePassword) {
-        getModel().register(username, password, rePassword, new IBaseModel.IRequestCallback<Register>() {
+        getModel().register(username, password, rePassword, new IRequestCallback<Register>() {
             @Override
             public void success(BaseResponse<Register> response) {
                 if (response.isOk()) {

@@ -1,13 +1,13 @@
-package com.jason.www.model;
+package com.jason.www.mvp.model;
 
 import com.google.gson.reflect.TypeToken;
-import com.jason.www.base.IBaseModel;
-import com.jason.www.contract.MainContract;
 import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.SmartHttpCallback;
 import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.http.response.HomeBanner;
 import com.jason.www.http.response.base.BaseResponse;
+import com.jason.www.mvp.callback.IRequestCallback;
+import com.jason.www.mvp.contract.MainContract;
 import com.jason.www.utils.CollectionUtils;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import retrofit2.Call;
  */
 public class MainModel extends MainContract.Model {
     @Override
-    public void getBannerHome(IBaseModel.IRequestCallback callback) {
+    public void getBannerHome(IRequestCallback callback) {
         RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<List<HomeBanner>>>() {
             @Override
             public void success(BaseResponse<List<HomeBanner>> response) {
@@ -46,7 +46,7 @@ public class MainModel extends MainContract.Model {
     }
 
     @Override
-    public void getHomeArticles(int page, IBaseModel.IRequestCallback callback) {
+    public void getHomeArticles(int page, IRequestCallback callback) {
         RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<HomeArticleBody>>() {
             @Override
             public void success(BaseResponse<HomeArticleBody> response) {

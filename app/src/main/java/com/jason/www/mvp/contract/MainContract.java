@@ -1,10 +1,11 @@
-package com.jason.www.contract;
+package com.jason.www.mvp.contract;
 
-import com.jason.www.base.IBaseModel;
-import com.jason.www.base.IBasePresenter;
-import com.jason.www.base.IBaseView;
 import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.http.response.HomeBanner;
+import com.jason.www.mvp.base.IBaseModel;
+import com.jason.www.mvp.base.IBasePresenter;
+import com.jason.www.mvp.base.IBaseView;
+import com.jason.www.mvp.callback.IRequestCallback;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ import java.util.List;
  */
 public interface MainContract {
     abstract class Model extends IBaseModel {
-        public abstract void getBannerHome(IBaseModel.IRequestCallback callback);
+        public abstract void getBannerHome(IRequestCallback callback);
 
-        public abstract void getHomeArticles(int page, IBaseModel.IRequestCallback callback);
+        public abstract void getHomeArticles(int page, IRequestCallback callback);
     }
 
     interface View extends IBaseView {

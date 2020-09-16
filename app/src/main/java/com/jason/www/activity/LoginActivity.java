@@ -9,9 +9,9 @@ import android.widget.EditText;
 import com.jason.www.R;
 import com.jason.www.base.BaseMvpActivity;
 import com.jason.www.config.Accounts;
-import com.jason.www.contract.LoginContract;
+import com.jason.www.mvp.contract.LoginContract;
 import com.jason.www.http.response.Login;
-import com.jason.www.presenter.LoginPresenter;
+import com.jason.www.mvp.presenter.LoginPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;

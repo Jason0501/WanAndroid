@@ -1,12 +1,13 @@
-package com.jason.www.model;
+package com.jason.www.mvp.model;
 
 import com.google.gson.reflect.TypeToken;
-import com.jason.www.base.IBaseModel;
-import com.jason.www.contract.LoginContract;
 import com.jason.www.http.BaseHttpCallback;
 import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.response.Login;
 import com.jason.www.http.response.base.BaseResponse;
+import com.jason.www.mvp.base.IBaseModel;
+import com.jason.www.mvp.callback.IRequestCallback;
+import com.jason.www.mvp.contract.LoginContract;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -19,7 +20,7 @@ import retrofit2.Call;
  */
 public class LoginModel extends LoginContract.Model {
     @Override
-    public IBaseModel login(String username, String password, IBaseModel.IRequestCallback callback) {
+    public IBaseModel login(String username, String password, IRequestCallback callback) {
         RetrofitHelper.enqueue(new BaseHttpCallback<BaseResponse<Login>>() {
             @Override
             public void success(BaseResponse response) {

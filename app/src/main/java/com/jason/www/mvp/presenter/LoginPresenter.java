@@ -1,10 +1,10 @@
-package com.jason.www.presenter;
+package com.jason.www.mvp.presenter;
 
-import com.jason.www.base.IBaseModel;
-import com.jason.www.contract.LoginContract;
 import com.jason.www.http.response.Login;
 import com.jason.www.http.response.base.BaseResponse;
-import com.jason.www.model.LoginModel;
+import com.jason.www.mvp.callback.IRequestCallback;
+import com.jason.www.mvp.contract.LoginContract;
+import com.jason.www.mvp.model.LoginModel;
 
 /**
  * @author：Jason
@@ -21,7 +21,7 @@ public class LoginPresenter extends LoginContract.Presenter {
 
     @Override
     public void login(String username, String password) {
-        getModel().login(username, password, new IBaseModel.IRequestCallback<Login>() {
+        getModel().login(username, password, new IRequestCallback<Login>() {
             @Override
             public void success(BaseResponse<Login> response) {
                 if (response.isOk()) {

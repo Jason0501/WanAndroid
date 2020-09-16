@@ -1,9 +1,10 @@
-package com.jason.www.contract;
+package com.jason.www.mvp.contract;
 
-import com.jason.www.base.IBaseModel;
-import com.jason.www.base.IBasePresenter;
-import com.jason.www.base.IBaseView;
 import com.jason.www.http.response.Login;
+import com.jason.www.mvp.base.IBaseModel;
+import com.jason.www.mvp.base.IBasePresenter;
+import com.jason.www.mvp.base.IBaseView;
+import com.jason.www.mvp.callback.IRequestCallback;
 
 /**
  * @author：Jason
@@ -13,7 +14,7 @@ import com.jason.www.http.response.Login;
  */
 public interface LoginContract {
     abstract class Model extends IBaseModel {
-        public abstract IBaseModel login(String username, String password, IBaseModel.IRequestCallback callback);
+        public abstract IBaseModel login(String username, String password, IRequestCallback callback);
     }
 
     interface View extends IBaseView {

@@ -1,5 +1,8 @@
 package com.jason.www.base;
 
+import com.jason.www.mvp.base.IBasePresenter;
+import com.jason.www.mvp.base.IBaseView;
+
 /**
  * @author：Jason
  * @date：2020/9/16 12:33

@@ -1,11 +1,11 @@
-package com.jason.www.presenter;
+package com.jason.www.mvp.presenter;
 
-import com.jason.www.base.IBaseModel;
-import com.jason.www.contract.MainContract;
 import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.http.response.HomeBanner;
 import com.jason.www.http.response.base.BaseResponse;
-import com.jason.www.model.MainModel;
+import com.jason.www.mvp.callback.IRequestCallback;
+import com.jason.www.mvp.contract.MainContract;
+import com.jason.www.mvp.model.MainModel;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class MainPresenter extends MainContract.Presenter {
 
     @Override
     public void getBannerHome() {
-        getModel().getBannerHome(new IBaseModel.IRequestCallback<List<HomeBanner>>() {
+        getModel().getBannerHome(new IRequestCallback<List<HomeBanner>>() {
             @Override
             public void success(BaseResponse<List<HomeBanner>> response) {
                 if (response.isOk()) {
@@ -42,7 +42,7 @@ public class MainPresenter extends MainContract.Presenter {
 
     @Override
     public void getHomeArticles(int page) {
-        getModel().getHomeArticles(page, new IBaseModel.IRequestCallback<HomeArticleBody>() {
+        getModel().getHomeArticles(page, new IRequestCallback<HomeArticleBody>() {
             @Override
             public void success(BaseResponse<HomeArticleBody> response) {
                 if (response.isOk()) {

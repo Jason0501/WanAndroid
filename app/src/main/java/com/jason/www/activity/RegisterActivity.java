@@ -8,9 +8,9 @@ import android.widget.EditText;
 import com.jason.www.R;
 import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseMvpActivity;
-import com.jason.www.contract.RegisterContract;
+import com.jason.www.mvp.contract.RegisterContract;
 import com.jason.www.http.response.Register;
-import com.jason.www.presenter.RegisterPresenter;
+import com.jason.www.mvp.presenter.RegisterPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;

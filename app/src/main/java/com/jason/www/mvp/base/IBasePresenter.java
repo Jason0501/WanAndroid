@@ -1,4 +1,4 @@
-package com.jason.www.base;
+package com.jason.www.mvp.base;
 
 /**
  * @author：Jason

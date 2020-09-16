@@ -1,12 +1,13 @@
-package com.jason.www.model;
+package com.jason.www.mvp.model;
 
 import com.google.gson.reflect.TypeToken;
-import com.jason.www.base.IBaseModel;
-import com.jason.www.contract.RegisterContract;
 import com.jason.www.http.BaseHttpCallback;
 import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.response.Register;
 import com.jason.www.http.response.base.BaseResponse;
+import com.jason.www.mvp.base.IBaseModel;
+import com.jason.www.mvp.callback.IRequestCallback;
+import com.jason.www.mvp.contract.RegisterContract;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -19,7 +20,7 @@ import retrofit2.Call;
  */
 public class RegisterModel extends RegisterContract.Model {
     @Override
-    public IBaseModel register(String username, String password, String rePassword, IBaseModel.IRequestCallback callback) {
+    public IBaseModel register(String username, String password, String rePassword, IRequestCallback callback) {
         RetrofitHelper.enqueue(new BaseHttpCallback<BaseResponse<Register>>() {
             @Override
             public void success(BaseResponse<Register> response) {
