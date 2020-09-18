@@ -11,6 +11,7 @@ import com.jason.www.adapter.BasePagerAdapter;
 import com.jason.www.base.BaseActivity;
 import com.jason.www.fragment.FrequentWebSiteFragment;
 import com.jason.www.fragment.HomeFragment;
+import com.jason.www.fragment.MineFragment;
 import com.jason.www.fragment.QuestionFragment;
 import com.jason.www.utils.SystemUtils;
 
@@ -43,7 +44,7 @@ public class HomeTabActivity extends BaseActivity {
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new QuestionFragment());
         mFragmentList.add(new FrequentWebSiteFragment());
-        mFragmentList.add(new FrequentWebSiteFragment());
+        mFragmentList.add(new MineFragment());
         viewpager.setOffscreenPageLimit(mFragmentList.size() - 1);
         BasePagerAdapter adapter = new BasePagerAdapter(mActivity.getSupportFragmentManager(),
                 mFragmentList, mTitleList);
