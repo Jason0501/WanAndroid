@@ -15,5 +15,9 @@ public interface Constants {
 
     interface SharedPrefferenceKey {
         String IS_LOGIN = "is_login";
+        String USER_ID = "user_id";
+        String USER_PUBLICNAME = "user_publicname";
+        String USER_NICKNAME = "USER_nickname";
+        String USER_ICON = "user_icon";
     }
 }

@@ -18,7 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * @email：1129847330@qq.com
  * @description:
  */
-public class HomeBannerAdapter extends BannerAdapter<HomeBanner, HomeBannerAdapter.BannerViewHolder> {
+public class HomeBannerAdapter extends BannerAdapter<HomeBanner,
+        HomeBannerAdapter.BannerViewHolder> {
 
     public HomeBannerAdapter() {
         super(Collections.emptyList());
@@ -37,12 +38,7 @@ public class HomeBannerAdapter extends BannerAdapter<HomeBanner, HomeBannerAdapt
 
     @Override
     public void onBindView(BannerViewHolder holder, HomeBanner data, int position, int size) {
-//        Glide.with(holder.itemView)
-//                .load(data.getImagePath())
-//                .thumbnail(Glide.with(holder.itemView).load(R.drawable.default_pic))
-//                .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
-//                .into(holder.imageView);
-        GlideUtils.loadImage(data.getImagePath(), holder.imageView);
+        GlideUtils.loadImage(holder.imageView, data.getImagePath());
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {

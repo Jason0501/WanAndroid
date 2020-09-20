@@ -47,19 +47,19 @@ public class GlideUtils {
                 .centerCrop();
     }
 
-    public static void loadImage(String imgUrl, ImageView imageView) {
+    public static void loadImage(ImageView imageView, String imgUrl) {
         RequestBuilder<Drawable> requestBuilder = load(imgUrl);
         setConfiguration(requestBuilder);
         requestBuilder.into(imageView);
     }
 
-    public static void loadImage(int resId, ImageView imageView) {
+    public static void loadImage(ImageView imageView, int resId) {
         RequestBuilder<Drawable> requestBuilder = load(resId);
         setConfiguration(requestBuilder);
         requestBuilder.into(imageView);
     }
 
-    public static void loadImage(File file, ImageView imageView) {
+    public static void loadImage(ImageView imageView, File file) {
         RequestBuilder<Drawable> requestBuilder = load(file);
         setConfiguration(requestBuilder);
         requestBuilder.into(imageView);
@@ -71,7 +71,7 @@ public class GlideUtils {
      * @param imgUrl
      * @param imageView
      */
-    public static void loadCircularImage(String imgUrl, ImageView imageView) {
+    public static void loadCircularImage(ImageView imageView, String imgUrl) {
         RequestBuilder<Drawable> requestBuilder = load(imgUrl);
         setConfiguration(requestBuilder);
         requestBuilder.transform(new CropCircleTransformation(context))
@@ -84,7 +84,7 @@ public class GlideUtils {
      * @param imgUrl
      * @param imageView
      */
-    public static void loadRoundImage(String imgUrl, ImageView imageView) {
+    public static void loadRoundImage(ImageView imageView, String imgUrl) {
         RequestBuilder<Drawable> requestBuilder = load(imgUrl);
         setConfiguration(requestBuilder);
         requestBuilder.transform(new RoundedCornersTransformation(context, 5, 0),

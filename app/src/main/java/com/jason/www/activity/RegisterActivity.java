@@ -1,15 +1,12 @@
 package com.jason.www.activity;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.jason.www.R;
-import com.jason.www.base.ActivityStackManager;
 import com.jason.www.base.BaseMvpActivity;
-import com.jason.www.config.Accounts;
 import com.jason.www.http.response.Register;
 import com.jason.www.mvp.contract.RegisterContract;
 import com.jason.www.mvp.presenter.RegisterPresenter;
@@ -71,9 +68,7 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
 
     @Override
     public void successRegister(Register register) {
-        Accounts.setIsLogin(true);
-        startActivity(new Intent(mContext, HomeTabActivity.class));
+        showToast("注册成功");
         finish();
-        ActivityStackManager.getInstance().finishActivity(LoginActivity.class);
     }
 }

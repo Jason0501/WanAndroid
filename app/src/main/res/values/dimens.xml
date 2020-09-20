@@ -29,7 +29,7 @@
     <dimen name="radius_large">7dp</dimen>
 
     <dimen name="home_bottom_navigator_height">60dp</dimen>
-    <dimen name="divider_line_horizontal_height">1px</dimen>
+    <dimen name="divider_line_horizontal_height">1dp</dimen>
     <dimen name="text_headline">@dimen/textsize_small</dimen>
     <dimen name="text_notes">@dimen/textsize_middle</dimen>
     <dimen name="text_content">@dimen/textsize_middle</dimen>
