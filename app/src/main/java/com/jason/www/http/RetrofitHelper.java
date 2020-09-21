@@ -19,7 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitHelper {
     private static Retrofit retrofit;
-//    private static SparseArray<Call> array;
 
     private RetrofitHelper() {
     }
@@ -29,7 +28,6 @@ public class RetrofitHelper {
             synchronized (RetrofitHelper.class) {
                 if (retrofit == null) {
                     retrofit = initRetrofit();
-//                    array = new SparseArray<>();
                 }
             }
         }
@@ -51,9 +49,11 @@ public class RetrofitHelper {
      */
     private static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        //持久化保存cookies
+        builder.addInterceptor(new ReceiveCookiesInterceptor());
+        builder.addInterceptor(new AddCookiesInterceptor());
         //忽略https证书验证，允许抓包
-        builder.sslSocketFactory(SSLFactory.createSSLSocketFactory(),
-                new SSLFactory.TrustAllManager());
+        builder.sslSocketFactory(SSLFactory.createSSLSocketFactory(), new SSLFactory.TrustAllManager());
         builder.hostnameVerifier(new SSLFactory.TrustAllHostnameVerifier());
         builder.callTimeout(7000, TimeUnit.MILLISECONDS);
         OkHttpClient client = builder.build();
@@ -69,7 +69,6 @@ public class RetrofitHelper {
             throw new NullPointerException("callback must not be null");
         }
         Call<ResponseBody> call = callback.getApi();
-//        array.put(retrofit.baseUrl().url().getPath().hashCode(), call);
         call.enqueue(new HttpCallback<T>(type) {
             @Override
             public void success(T response) {

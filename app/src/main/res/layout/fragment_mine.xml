@@ -44,91 +44,46 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin_large"
                     android:textColor="@color/textcolor_black"
-                    android:textSize="@dimen/textsize_small"
+                    android:textSize="@dimen/textsize_xxlarge"
+                    android:textStyle="bold"
                     tools:text="Jason" />
 
-                <LinearLayout
-                    android:id="@+id/ll_user_id"
+                <TextView
+                    android:id="@+id/tv_user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_user_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:alpha="0.8"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ID:"
-                        android:textColor="@color/textcolor_black"
-                        android:textSize="@dimen/textsize_middle" />
-
-                    <TextView
-                        android:id="@+id/tv_user_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/textcolor_black"
-                        android:textSize="@dimen/textsize_middle"
-                        tools:text="-----" />
-
-                </LinearLayout>
+                    android:textColor="@color/textcolor_black"
+                    android:textSize="@dimen/textsize_middle"
+                    tools:text="ID:-----" />
 
                 <LinearLayout
                     android:id="@+id/ll_user_level_ranking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ll_user_id"
+                    android:layout_below="@+id/tv_user_id"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin_small"
                     android:alpha="0.8">
 
-                    <LinearLayout
-                        android:id="@+id/ll_user_level"
+                    <TextView
+                        android:id="@+id/tv_user_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle"
+                        tools:text="等级：15" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="等级:"
-                            android:textColor="@color/textcolor_black"
-                            android:textSize="@dimen/textsize_middle" />
-
-                        <TextView
-                            android:id="@+id/tv_user_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textcolor_black"
-                            android:textSize="@dimen/textsize_middle"
-                            tools:text="15" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_user_ranking"
+                    <TextView
+                        android:id="@+id/tv_user_ranking"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_large"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="排名:"
-                            android:textColor="@color/textcolor_black"
-                            android:textSize="@dimen/textsize_middle" />
-
-                        <TextView
-                            android:id="@+id/tv_user_ranking"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/textcolor_black"
-                            android:textSize="@dimen/textsize_middle"
-                            tools:text="71" />
-
-                    </LinearLayout>
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle"
+                        tools:text="排名：71" />
 
                 </LinearLayout>
 
@@ -174,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/textcolor_light_grey"
-                        android:textSize="@dimen/textsize_middle"
+                        android:textSize="@dimen/textsize_small"
                         tools:text="520" />
 
                 </LinearLayout>
@@ -322,7 +277,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/buy_him_a_cup_of_coffee"
                         android:textColor="@color/textcolor_light_grey"
-                        android:textSize="@dimen/textsize_middle"
+                        android:textSize="@dimen/textsize_small"
                         app:bl_pressed_textColor="@color/pressed_text_color"
                         app:bl_unPressed_textColor="@color/textcolor_light_grey" />
 
@@ -374,6 +329,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:text="@string/login_out"
+                android:textColor="@color/textcolor_black"
                 android:textSize="@dimen/textsize_middle"
                 app:bl_pressed_solid_color="@color/pressed_bg_color"
                 app:bl_unPressed_solid_color="@color/unpressed_bg_color" />

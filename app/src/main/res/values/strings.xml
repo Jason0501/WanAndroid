@@ -12,6 +12,21 @@
     <string name="about_author">关于作者</string>
     <string name="system_settings">系统设置</string>
     <string name="login_out">退出登录</string>
+    <string name="go_to_login">去登录</string>
+    <string name="please_input_username">请输入用户名</string>
+    <string name="please_input_password">请输入密码</string>
+    <string name="please_set_password_first">请先设置密码</string>
+    <string name="please_confirm_password_first">请先确认密码</string>
+    <string name="different_password">两次输入的密码不一样</string>
     <string name="buy_him_a_cup_of_coffee">请他喝杯咖啡~</string>
+
+    <string name="dialog_title_login_out">退出登录</string>
+    <string name="dialog_message_login_out">确认退出登录吗?</string>
+    <string name="dialog_positive_button_login_out">去意已决</string>
+
+    <string name="format_user_id" formatted="false">ID:%d</string>
+    <string name="format_user_rank" formatted="false">排行:%d</string>
+    <string name="format_user_level" formatted="false">等级:%d</string>
+
 
 </resources>

@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import com.jason.www.config.AppData;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -28,9 +30,24 @@ public abstract class BaseFragment extends LazyFragment {
         mActivity = (AppCompatActivity) context;
     }
 
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onStart() {
+        super.onStart();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     protected int getColor(int resId) {

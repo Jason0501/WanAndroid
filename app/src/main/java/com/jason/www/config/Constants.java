@@ -8,6 +8,7 @@ package com.jason.www.config;
  */
 public interface Constants {
     String SP_NAME = "wanandroid";
+    String COOKIE_PREF = "cookies_prefs";
 
     interface IntentKey {
         String WEBVIEW_URL = "webview_url";

@@ -46,6 +46,11 @@ public class ShaPrefer {
         editor.commit();
     }
 
+    public static synchronized boolean contains(String key) {
+        checkDefault();
+        return preferences.contains(key);
+    }
+
     public static synchronized void put(String key, Object value) {
         batPut(key, value);
         editor.commit();

@@ -76,6 +76,20 @@ public interface RetrofitUrl {
     @GET("friend/json")
     Call<ResponseBody> getFrequentWebSite();
 
-    @GET("wenda/list/{page}/json ")
+    /**
+     * 获取问答列表
+     *
+     * @param page
+     * @return
+     */
+    @GET("wenda/list/{page}/json")
     Call<ResponseBody> getQuestion(@Path("page") int page);
+
+    /**
+     * 获取个人积分,排名等信息
+     *
+     * @return
+     */
+    @GET("lg/coin/userinfo/json")
+    Call<ResponseBody> getUserInfo();
 }

@@ -5,7 +5,6 @@ import android.widget.ImageView;
 
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
-import com.jason.www.config.Accounts;
 
 import butterknife.BindView;
 
@@ -19,11 +18,7 @@ public class SplashActivity extends BaseActivity {
         imageView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (Accounts.getIsLogin()) {
-                    startActivity(MainActivity.class);
-                } else {
-                    startActivity(LoginActivity.class);
-                }
+                startActivity(MainActivity.class);
                 finish();
             }
         }, 1000);

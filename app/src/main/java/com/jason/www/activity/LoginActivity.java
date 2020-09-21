@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.jason.www.R;
 import com.jason.www.base.BaseMvpActivity;
 import com.jason.www.config.Accounts;
+import com.jason.www.event.LoginEvent;
 import com.jason.www.mvp.contract.LoginContract;
 import com.jason.www.http.response.Login;
 import com.jason.www.mvp.presenter.LoginPresenter;
@@ -52,11 +53,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 String username = edittextUsername.getText().toString();
                 String password = edittextPassword.getText().toString();
                 if (TextUtils.isEmpty(username)) {
-                    showToast("请输入用户名");
+                    showToast(getString(R.string.please_input_username));
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    showToast("请输入密码");
+                    showToast(getString(R.string.please_input_password));
                     return;
                 }
                 getPresenter().login(username, password);
@@ -71,7 +72,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void successLogin(Login login) {
         Accounts.setLoginInfo(login);
-        startActivity(new Intent(mContext, MainActivity.class));
+        new LoginEvent(true).post();
         mActivity.finish();
     }
 }

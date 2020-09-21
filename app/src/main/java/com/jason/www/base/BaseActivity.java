@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
@@ -51,6 +53,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void beforeSetContentView() {
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    protected boolean isRegisterEventBus() {
+        return false;
     }
 
     protected void showToast(String msg) {

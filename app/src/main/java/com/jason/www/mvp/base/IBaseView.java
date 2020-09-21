@@ -7,5 +7,5 @@ package com.jason.www.mvp.base;
  * @description:
  */
 public interface IBaseView {
-    void failLoad(String msg);
+    void failLoad(String errorMsg);
 }

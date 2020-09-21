@@ -48,19 +48,19 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
         String password = edittextPassword.getText().toString();
         String repassword = edittextRepassword.getText().toString();
         if (TextUtils.isEmpty(username)) {
-            showToast("请先输入用户名");
+            showToast(getString(R.string.please_input_username));
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            showToast("请先设置密码");
+            showToast(getString(R.string.please_set_password_first));
             return;
         }
         if (TextUtils.isEmpty(repassword)) {
-            showToast("请先确认密码");
+            showToast(getString(R.string.please_confirm_password_first));
             return;
         }
         if (!TextUtils.equals(password, repassword)) {
-            showToast("两次密码输入不一样");
+            showToast(getString(R.string.different_password));
             return;
         }
         getPresenter().register(username, password, repassword);
