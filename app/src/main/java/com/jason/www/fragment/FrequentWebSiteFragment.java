@@ -11,6 +11,7 @@ import com.jason.www.http.response.FrequentWebSite;
 import com.jason.www.mvp.contract.FrequentWebSiteContract;
 import com.jason.www.mvp.presenter.FrequentWebSitePresenter;
 import com.jason.www.utils.IntentUtils;
+import com.jason.www.widget.CommonItemDecoration;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
@@ -18,7 +19,6 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -41,8 +41,7 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
         super.initView(view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
-        recyclerview.addItemDecoration(new DividerItemDecoration(mContext,
-                DividerItemDecoration.VERTICAL));
+        recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
         mAdapter = new FrequentWebSiteAdapter();
         recyclerview.setAdapter(mAdapter);
         smartrefreshlayout.setEnableLoadMore(false);

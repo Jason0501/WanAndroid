@@ -58,4 +58,5 @@ dependencies {
     annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:4.7.0"
     implementation 'com.youth.banner:banner:2.1.0'
     implementation 'com.github.hackware1993:MagicIndicator:1.6.0'
+    implementation 'com.noober.background:core:1.6.5'
 }

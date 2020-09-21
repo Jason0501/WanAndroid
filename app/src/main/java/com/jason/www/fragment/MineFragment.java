@@ -11,7 +11,7 @@ import com.jason.www.R;
 import com.jason.www.activity.LoginActivity;
 import com.jason.www.base.BaseFragment;
 import com.jason.www.config.Accounts;
-import com.jason.www.utils.glide.GlideUtils;
+import com.jason.www.utils.GlideUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
@@ -71,7 +71,7 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void initView(View view) {
         super.initView(view);
-        GlideUtils.loadImage(civUserIcon, Accounts.getUserAvatar());
+        GlideUtils.loadAvatar(civUserIcon, Accounts.getUserAvatar());
         tvUserName.setText(Accounts.getUserName());
         tvUserId.setText(Accounts.getUserId() + "");
     }
@@ -100,7 +100,7 @@ public class MineFragment extends BaseFragment {
             R.id.tv_user_level, R.id.ll_user_level, R.id.tv_user_ranking, R.id.ll_user_ranking,
             R.id.ll_user_level_ranking, R.id.rl_user_info, R.id.tv_coin, R.id.ll_coin,
             R.id.ll_share, R.id.ll_collect, R.id.ll_read_record, R.id.ll_about_me,
-            R.id.ll_setting, R.id.tv_login_out})
+            R.id.ll_setting, R.id.tv_login_out, R.id.tv_but_him_a_cup_of_coffee})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.civ_user_icon:
@@ -139,6 +139,8 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.tv_login_out:
                 showLoginOutDialog();
+                break;
+            case R.id.tv_but_him_a_cup_of_coffee:
                 break;
         }
     }

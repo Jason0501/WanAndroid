@@ -1,4 +1,4 @@
-package com.jason.www.utils.glide;
+package com.jason.www.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,12 +9,9 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.BaseRequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.jason.www.R;
 
 import java.io.File;
-
-import androidx.core.content.ContextCompat;
 
 public class GlideUtils {
     private static Context context;
@@ -47,6 +44,17 @@ public class GlideUtils {
                 .centerCrop();
     }
 
+    private static BaseRequestOptions setAvatarConfiguration(RequestBuilder request) {
+        BaseRequestOptions options = setConfiguration(request);
+        return options.error(R.drawable.default_avatar);
+    }
+
+    public static void loadAvatar(ImageView imageView, String imgUrl) {
+        RequestBuilder<Drawable> requestBuilder = load(imgUrl);
+        setAvatarConfiguration(requestBuilder);
+        requestBuilder.into(imageView);
+    }
+
     public static void loadImage(ImageView imageView, String imgUrl) {
         RequestBuilder<Drawable> requestBuilder = load(imgUrl);
         setConfiguration(requestBuilder);
@@ -63,34 +71,5 @@ public class GlideUtils {
         RequestBuilder<Drawable> requestBuilder = load(file);
         setConfiguration(requestBuilder);
         requestBuilder.into(imageView);
-    }
-
-    /**
-     * 圆图
-     *
-     * @param imgUrl
-     * @param imageView
-     */
-    public static void loadCircularImage(ImageView imageView, String imgUrl) {
-        RequestBuilder<Drawable> requestBuilder = load(imgUrl);
-        setConfiguration(requestBuilder);
-        requestBuilder.transform(new CropCircleTransformation(context))
-                .into(imageView);
-    }
-
-    /**
-     * 加载正方形图片带圆角
-     *
-     * @param imgUrl
-     * @param imageView
-     */
-    public static void loadRoundImage(ImageView imageView, String imgUrl) {
-        RequestBuilder<Drawable> requestBuilder = load(imgUrl);
-        setConfiguration(requestBuilder);
-        requestBuilder.transform(new RoundedCornersTransformation(context, 5, 0),
-                new ColorFilterTransformation(context, ContextCompat.getColor(context,
-                        R.color.trans_6)))
-                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).into(imageView);
-
     }
 }

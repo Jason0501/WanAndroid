@@ -11,13 +11,13 @@ import com.jason.www.http.response.Question;
 import com.jason.www.mvp.contract.QuestionContract;
 import com.jason.www.mvp.presenter.QuestionPresenter;
 import com.jason.www.utils.IntentUtils;
+import com.jason.www.widget.CommonItemDecoration;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -42,8 +42,7 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
         super.initView(view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
-        recyclerview.addItemDecoration(new DividerItemDecoration(mContext,
-                DividerItemDecoration.VERTICAL));
+        recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
         mAdapter = new QuestionAdapter();
         recyclerview.setAdapter(mAdapter);
     }

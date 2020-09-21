@@ -4,7 +4,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.jason.www.http.response.HomeBanner;
-import com.jason.www.utils.glide.GlideUtils;
+import com.jason.www.utils.GlideUtils;
 import com.youth.banner.adapter.BannerAdapter;
 
 import java.util.Collections;

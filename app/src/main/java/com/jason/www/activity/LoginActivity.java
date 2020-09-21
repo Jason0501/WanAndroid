@@ -71,7 +71,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     @Override
     public void successLogin(Login login) {
         Accounts.setLoginInfo(login);
-        startActivity(new Intent(mContext, HomeTabActivity.class));
+        startActivity(new Intent(mContext, MainActivity.class));
         mActivity.finish();
     }
 }

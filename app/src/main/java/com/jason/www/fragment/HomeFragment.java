@@ -16,6 +16,7 @@ import com.jason.www.mvp.contract.MainContract;
 import com.jason.www.mvp.presenter.MainPresenter;
 import com.jason.www.utils.DisplayUtils;
 import com.jason.www.utils.IntentUtils;
+import com.jason.www.widget.CommonItemDecoration;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
@@ -27,7 +28,6 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -57,8 +57,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     private void initRecyclerView() {
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(manager);
-        recyclerview.addItemDecoration(new DividerItemDecoration(mContext,
-                LinearLayoutManager.VERTICAL));
+        recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
         mHomeAdapter = new HomeAdapter();
         initBanner();
         recyclerview.setAdapter(mHomeAdapter);

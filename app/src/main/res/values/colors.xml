@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#04BE02</color>
-    <color name="colorPrimaryDark">#04BE02</color>
-    <color name="colorAccent">#04BE02</color>
-
-    <color name="theme_color">@color/colorAccent</color>
+    <color name="theme_color">#04BE02</color>
+    <color name="colorPrimary">@color/theme_color</color>
+    <color name="colorPrimaryDark">@color/theme_color</color>
+    <color name="colorAccent">@color/theme_color</color>
     <color name="windows_background">#f0f0f0</color>
-    <color name="divider">@color/windows_background</color>
-    <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
-    <color name="background_normal">#d0d0d0</color>
-
+    <!--文本用色-->
     <color name="textcolor_black">#333333</color>
     <color name="textcolor_dark_grey">#666666</color>
     <color name="textcolor_light_grey">#999999</color>
-
+    <!--常用色-->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
     <color name="trans_6">#6000</color>
+
+    <!--分割线的颜色-->
+    <color name="divider">@color/windows_background</color>
+    <!--按下去的背景色-->
+    <color name="pressed_bg_color">#e0e0e0</color>
+    <!--松开的背景色-->
+    <color name="unpressed_bg_color">@color/white</color>
+    <!--按下去的文本色-->
+    <color name="pressed_text_color">#e0e0e0</color>
+    <!--遮罩颜色-->
     <color name="blur_mask">#11000000</color>
-    <color name="basic_ui_action_bar_text">@color/textcolor_black</color>
-    <color name="text_surface">@color/textcolor_black</color>
 </resources>

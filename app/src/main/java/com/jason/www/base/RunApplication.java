@@ -6,7 +6,7 @@ import android.content.Context;
 import com.jason.www.R;
 import com.jason.www.config.AppData;
 import com.jason.www.utils.DynamicTimeFormat;
-import com.jason.www.utils.glide.GlideUtils;
+import com.jason.www.utils.GlideUtils;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;

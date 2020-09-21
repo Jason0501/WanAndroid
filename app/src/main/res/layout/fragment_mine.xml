@@ -5,7 +5,8 @@
     android:id="@id/smartrefreshlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:srlEnablePureScrollMode="true">
+    app:srlEnablePureScrollMode="true"
+    tools:ignore="MissingPrefix">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv"
@@ -26,14 +27,14 @@
                 android:layout_height="260dp"
                 android:background="@color/white">
 
-                <ImageView
+                <com.jason.www.widget.CircleImageView
                     android:id="@+id/civ_user_icon"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="80dp"
-                    android:background="@color/blur_mask"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/default_avatar" />
 
                 <TextView
                     android:id="@+id/tv_user_name"
@@ -41,9 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/civ_user_icon"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/basic_ui_action_bar_text"
-                    android:textSize="@dimen/text_headline"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:textColor="@color/textcolor_black"
+                    android:textSize="@dimen/textsize_small"
                     tools:text="Jason" />
 
                 <LinearLayout
@@ -52,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_user_name"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:alpha="0.8"
                     android:orientation="horizontal">
 
@@ -60,15 +61,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ID:"
-                        android:textColor="@color/basic_ui_action_bar_text"
-                        android:textSize="@dimen/text_notes" />
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
                     <TextView
                         android:id="@+id/tv_user_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/basic_ui_action_bar_text"
-                        android:textSize="@dimen/text_notes"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle"
                         tools:text="-----" />
 
                 </LinearLayout>
@@ -79,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll_user_id"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:alpha="0.8">
 
                     <LinearLayout
@@ -92,42 +93,39 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="等级:"
-                            android:textColor="@color/basic_ui_action_bar_text"
-                            android:textSize="@dimen/text_notes" />
+                            android:textColor="@color/textcolor_black"
+                            android:textSize="@dimen/textsize_middle" />
 
                         <TextView
                             android:id="@+id/tv_user_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/basic_ui_action_bar_text"
-                            android:textSize="@dimen/text_notes"
+                            android:textColor="@color/textcolor_black"
+                            android:textSize="@dimen/textsize_middle"
                             tools:text="15" />
 
                     </LinearLayout>
-
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="0dp" />
 
                     <LinearLayout
                         android:id="@+id/ll_user_ranking"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_large"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="排名:"
-                            android:textColor="@color/basic_ui_action_bar_text"
-                            android:textSize="@dimen/text_notes" />
+                            android:textColor="@color/textcolor_black"
+                            android:textSize="@dimen/textsize_middle" />
 
                         <TextView
                             android:id="@+id/tv_user_ranking"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/basic_ui_action_bar_text"
-                            android:textSize="@dimen/text_notes"
+                            android:textColor="@color/textcolor_black"
+                            android:textSize="@dimen/textsize_middle"
                             tools:text="71" />
 
                     </LinearLayout>
@@ -147,31 +145,36 @@
                 <LinearLayout
                     android:id="@+id/ll_coin"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/item_height"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/padding_xlarge"
+                    android:paddingRight="@dimen/padding_xlarge"
+                    app:bl_pressed_solid_color="@color/pressed_bg_color"
+                    app:bl_unPressed_solid_color="@color/unpressed_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_symbol_width"
+                        android:layout_height="@dimen/ic_symbol_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/integral" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="我的积分"
-                        android:textColor="@color/text_surface"
-                        android:textSize="@dimen/text_content" />
+                        android:text="@string/my_integral"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
                     <TextView
                         android:id="@+id/tv_coin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:singleLine="true"
-                        android:text=""
-                        android:textSize="@dimen/text_notes"
+                        android:textColor="@color/textcolor_light_grey"
+                        android:textSize="@dimen/textsize_middle"
                         tools:text="520" />
 
                 </LinearLayout>
@@ -181,23 +184,35 @@
                 <LinearLayout
                     android:id="@+id/ll_share"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/item_height"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/padding_large"
+                    android:paddingRight="@dimen/padding_large"
+                    app:bl_pressed_solid_color="@color/pressed_bg_color"
+                    app:bl_unPressed_solid_color="@color/unpressed_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_symbol_width"
+                        android:layout_height="@dimen/ic_symbol_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/share" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="我的分享"
-                        android:textColor="@color/text_surface"
-                        android:textSize="@dimen/text_content" />
+                        android:text="@string/my_share"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
+                    <ImageView
+                        android:layout_width="@dimen/ic_arrow_width"
+                        android:layout_height="@dimen/ic_arrow_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/arrow_gray" />
                 </LinearLayout>
 
                 <include layout="@layout/divider_line_horizontal" />
@@ -205,23 +220,35 @@
                 <LinearLayout
                     android:id="@+id/ll_collect"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/item_height"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/padding_large"
+                    android:paddingRight="@dimen/padding_large"
+                    app:bl_pressed_solid_color="@color/pressed_bg_color"
+                    app:bl_unPressed_solid_color="@color/unpressed_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_symbol_width"
+                        android:layout_height="@dimen/ic_symbol_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/collection" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="我的收藏"
-                        android:textColor="@color/text_surface"
-                        android:textSize="@dimen/text_content" />
+                        android:text="@string/my_collection"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
+                    <ImageView
+                        android:layout_width="@dimen/ic_arrow_width"
+                        android:layout_height="@dimen/ic_arrow_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/arrow_gray" />
                 </LinearLayout>
 
                 <include layout="@layout/divider_line_horizontal" />
@@ -229,24 +256,35 @@
                 <LinearLayout
                     android:id="@+id/ll_read_record"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-
+                    android:layout_height="@dimen/item_height"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/padding_large"
+                    android:paddingRight="@dimen/padding_large"
+                    app:bl_pressed_solid_color="@color/pressed_bg_color"
+                    app:bl_unPressed_solid_color="@color/unpressed_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_symbol_width"
+                        android:layout_height="@dimen/ic_symbol_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/history" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="阅读历史"
-                        android:textColor="@color/text_surface"
-                        android:textSize="@dimen/text_content" />
+                        android:text="@string/reading_history"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
+                    <ImageView
+                        android:layout_width="@dimen/ic_arrow_width"
+                        android:layout_height="@dimen/ic_arrow_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/arrow_gray" />
                 </LinearLayout>
 
                 <include layout="@layout/divider_line_horizontal" />
@@ -254,30 +292,39 @@
                 <LinearLayout
                     android:id="@+id/ll_about_me"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/item_height"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/padding_large"
+                    android:paddingRight="@dimen/padding_large"
+                    app:bl_pressed_solid_color="@color/pressed_bg_color"
+                    app:bl_unPressed_solid_color="@color/unpressed_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_symbol_width"
+                        android:layout_height="@dimen/ic_symbol_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/about" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="关于作者"
-                        android:textColor="@color/text_surface"
-                        android:textSize="@dimen/text_content" />
+                        android:text="@string/about_author"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
                     <TextView
+                        android:id="@+id/tv_but_him_a_cup_of_coffee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:singleLine="true"
-                        android:text="请他喝杯咖啡~"
-                        android:textSize="@dimen/text_notes" />
+                        android:text="@string/buy_him_a_cup_of_coffee"
+                        android:textColor="@color/textcolor_light_grey"
+                        android:textSize="@dimen/textsize_middle"
+                        app:bl_pressed_textColor="@color/pressed_text_color"
+                        app:bl_unPressed_textColor="@color/textcolor_light_grey" />
 
                 </LinearLayout>
 
@@ -286,23 +333,35 @@
                 <LinearLayout
                     android:id="@+id/ll_setting"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/item_height"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingLeft="@dimen/padding_large"
+                    android:paddingRight="@dimen/padding_large"
+                    app:bl_pressed_solid_color="@color/pressed_bg_color"
+                    app:bl_unPressed_solid_color="@color/unpressed_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/ic_symbol_width"
+                        android:layout_height="@dimen/ic_symbol_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/setting" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="系统设置"
-                        android:textColor="@color/text_surface"
-                        android:textSize="@dimen/text_content" />
+                        android:text="@string/system_settings"
+                        android:textColor="@color/textcolor_black"
+                        android:textSize="@dimen/textsize_middle" />
 
+                    <ImageView
+                        android:layout_width="@dimen/ic_arrow_width"
+                        android:layout_height="@dimen/ic_arrow_height"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/arrow_gray" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -310,16 +369,14 @@
             <TextView
                 android:id="@+id/tv_login_out"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/item_height"
                 android:layout_marginTop="@dimen/margin_xxlarge"
                 android:background="@color/white"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="退出登录"
-                android:textColor="@color/text_surface"
-                android:textSize="@dimen/text_content" />
+                android:text="@string/login_out"
+                android:textSize="@dimen/textsize_middle"
+                app:bl_pressed_solid_color="@color/pressed_bg_color"
+                app:bl_unPressed_solid_color="@color/unpressed_bg_color" />
 
         </LinearLayout>
 

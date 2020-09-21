@@ -8,17 +8,18 @@
 
     <ImageView
         android:id="@+id/imageview_tab_home"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/ic_symbol_width"
+        android:layout_height="@dimen/ic_symbol_height"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_tab_two_selected" />
+        android:src="@drawable/ic_tab_one_selected" />
 
     <TextView
         android:id="@+id/textview_tab_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xxsmall"
         android:textColor="@color/selector_tab_textcolor"
-        android:textSize="@dimen/textsize_small"
+        android:textSize="@dimen/textsize_xsmall"
         tools:text="首页" />
 
 </LinearLayout>

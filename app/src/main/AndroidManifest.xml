@@ -11,11 +11,11 @@
         android:name=".base.RunApplication"
         android:allowBackup="true"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
@@ -29,8 +29,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.HomeTabActivity"
-            android:label="@string/activity_main" />
+            android:name=".activity.MainActivity"
+            android:label="@string/activity_main"
+            android:theme="@style/FullScreenTheme" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/activity_login"

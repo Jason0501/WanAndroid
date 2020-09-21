@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
-public class HomeTabActivity extends BaseActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
@@ -78,7 +78,7 @@ public class HomeTabActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_home_tab;
+        return R.layout.activity_main;
     }
 
     private long firstTimeMillis;

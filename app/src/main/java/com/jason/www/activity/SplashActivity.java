@@ -20,13 +20,13 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 if (Accounts.getIsLogin()) {
-                    startActivity(HomeTabActivity.class);
+                    startActivity(MainActivity.class);
                 } else {
                     startActivity(LoginActivity.class);
                 }
                 finish();
             }
-        }, 2000);
+        }, 1000);
     }
 
     @Override
