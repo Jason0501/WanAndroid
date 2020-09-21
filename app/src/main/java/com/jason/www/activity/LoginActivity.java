@@ -1,6 +1,5 @@
 package com.jason.www.activity;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +9,8 @@ import com.jason.www.R;
 import com.jason.www.base.BaseMvpActivity;
 import com.jason.www.config.Accounts;
 import com.jason.www.event.LoginEvent;
-import com.jason.www.mvp.contract.LoginContract;
 import com.jason.www.http.response.Login;
+import com.jason.www.mvp.contract.LoginContract;
 import com.jason.www.mvp.presenter.LoginPresenter;
 
 import butterknife.BindView;
@@ -47,7 +46,7 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.textview_register:
-                register();
+                startActivity(RegisterActivity.class);
                 break;
             case R.id.btn_login:
                 String username = edittextUsername.getText().toString();
@@ -63,10 +62,6 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
                 getPresenter().login(username, password);
                 break;
         }
-    }
-
-    private void register() {
-        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @Override

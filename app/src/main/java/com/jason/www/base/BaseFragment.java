@@ -30,24 +30,24 @@ public abstract class BaseFragment extends LazyFragment {
         mActivity = (AppCompatActivity) context;
     }
 
-    protected boolean isRegisterEventBus() {
-        return false;
-    }
-
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void initView() {
+        super.initView();
         if (isRegisterEventBus()) {
             EventBus.getDefault().register(this);
         }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (isRegisterEventBus()) {
             EventBus.getDefault().unregister(this);
         }
+    }
+
+    protected boolean isRegisterEventBus() {
+        return false;
     }
 
     protected int getColor(int resId) {

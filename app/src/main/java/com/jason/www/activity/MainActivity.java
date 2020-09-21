@@ -13,6 +13,7 @@ import com.jason.www.fragment.FrequentWebSiteFragment;
 import com.jason.www.fragment.HomeFragment;
 import com.jason.www.fragment.MineFragment;
 import com.jason.www.fragment.QuestionFragment;
+import com.jason.www.utils.FastClickUtils;
 import com.jason.www.utils.SystemUtils;
 
 import java.util.ArrayList;
@@ -81,17 +82,13 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    private long firstTimeMillis;
-
     @Override
     public void onBackPressed() {
-        long t = System.currentTimeMillis();
-        if (t - firstTimeMillis <= 1500) {
+        if (FastClickUtils.isFastClicked(2000)) {
             super.onBackPressed();
             SystemUtils.killMySelfProcess();
         } else {
             showToast(getString(R.string.exist_press_again));
-            firstTimeMillis = t;
         }
     }
 }

@@ -37,8 +37,8 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
     private FrequentWebSiteAdapter mAdapter;
 
     @Override
-    protected void initView(View view) {
-        super.initView(view);
+    protected void initView() {
+        super.initView();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());

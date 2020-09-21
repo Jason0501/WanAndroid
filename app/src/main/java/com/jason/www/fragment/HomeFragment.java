@@ -49,8 +49,8 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     private int mPage;
 
     @Override
-    protected void initView(View decorView) {
-        super.initView(decorView);
+    protected void initView() {
+        super.initView();
         initRecyclerView();
     }
 
@@ -104,8 +104,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
         View view = LayoutInflater.from(mContext).inflate(R.layout.header_home, null);
         mBanner = view.findViewById(R.id.banner_home);
         int width = DisplayUtils.realWidth();
-        FrameLayout.LayoutParams layoutParams =
-                (FrameLayout.LayoutParams) mBanner.getLayoutParams();
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mBanner.getLayoutParams();
         layoutParams.width = width;
         layoutParams.height = width * 5 / 9;
         mBanner.setLayoutParams(layoutParams);

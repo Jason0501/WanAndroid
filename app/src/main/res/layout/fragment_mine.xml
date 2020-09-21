@@ -272,7 +272,6 @@
                         android:textSize="@dimen/textsize_middle" />
 
                     <TextView
-                        android:id="@+id/tv_but_him_a_cup_of_coffee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/buy_him_a_cup_of_coffee"

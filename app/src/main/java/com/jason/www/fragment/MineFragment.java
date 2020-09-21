@@ -54,6 +54,8 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
     RelativeLayout rlUserInfo;
     @BindView(R.id.tv_coin)
     TextView tvCoin;
+    @BindView(R.id.tv_login_out)
+    TextView tvLoginOut;
     @BindView(R.id.ll_coin)
     LinearLayout llCoin;
     @BindView(R.id.ll_share)
@@ -70,15 +72,21 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
     NestedScrollView nsv;
 
     @Override
-    protected void initView(View view) {
-        super.initView(view);
+    protected void initView() {
+        super.initView();
+        bindView();
+    }
+
+    private void bindView() {
         if (!Accounts.getIsLogin()) {
             tvUserName.setText(getString(R.string.go_to_login));
             tvUserId.setVisibility(View.GONE);
             tvUserLevel.setVisibility(View.GONE);
             tvUserRanking.setVisibility(View.GONE);
+            tvLoginOut.setVisibility(View.GONE);
             tvCoin.setText("--");
         } else {
+            tvLoginOut.setVisibility(View.VISIBLE);
             tvUserId.setVisibility(View.VISIBLE);
             tvUserLevel.setVisibility(View.VISIBLE);
             tvUserRanking.setVisibility(View.VISIBLE);
@@ -127,37 +135,26 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void loginEvent(LoginEvent loginEvent) {
+        if (isDetached()) {
+            return;
+        }
         if (loginEvent.isLogin()) {
+            bindView();
             loadData();
         }
     }
 
-    @OnClick({R.id.civ_user_icon, R.id.tv_user_name, R.id.tv_user_id,
-            R.id.tv_user_level, R.id.tv_user_ranking,
-            R.id.ll_user_level_ranking, R.id.rl_user_info, R.id.tv_coin, R.id.ll_coin,
-            R.id.ll_share, R.id.ll_collect, R.id.ll_read_record, R.id.ll_about_me,
-            R.id.ll_setting, R.id.tv_login_out, R.id.tv_but_him_a_cup_of_coffee})
+    @OnClick({R.id.civ_user_icon, R.id.ll_coin, R.id.ll_share, R.id.ll_collect, R.id.ll_read_record,
+            R.id.ll_about_me, R.id.ll_setting, R.id.tv_login_out, R.id.tv_user_name})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.civ_user_icon:
                 break;
             case R.id.tv_user_name:
-                break;
-            case R.id.tv_user_id:
-                break;
-            case R.id.tv_user_level:
-                break;
-            case R.id.tv_user_ranking:
-                break;
-            case R.id.ll_user_level_ranking:
-                break;
-            case R.id.rl_user_info:
                 if (Accounts.getIsLogin()) {
                     return;
                 }
                 startActivity(LoginActivity.class);
-                break;
-            case R.id.tv_coin:
                 break;
             case R.id.ll_coin:
                 break;
@@ -174,8 +171,6 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
             case R.id.tv_login_out:
                 showLoginOutDialog();
                 break;
-            case R.id.tv_but_him_a_cup_of_coffee:
-                break;
         }
     }
 
@@ -187,8 +182,7 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Accounts.loginOut();
-                        startActivity(LoginActivity.class);
-                        mActivity.finish();
+                        bindView();
                     }
                 }).create().show();
     }

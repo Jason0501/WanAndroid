@@ -38,8 +38,8 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
     private boolean mIsRefresh;
 
     @Override
-    protected void initView(View view) {
-        super.initView(view);
+    protected void initView() {
+        super.initView();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());

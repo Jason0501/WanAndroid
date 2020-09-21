@@ -22,7 +22,7 @@ public abstract class LazyFragment extends CacheFragment {
     protected void onVisible(boolean isFirstVisible) {
         if (isFirstVisible) {
             initMvp();
-            initView(mRootView);
+            initView();
             initEvent();
             initData();
         }
@@ -31,7 +31,7 @@ public abstract class LazyFragment extends CacheFragment {
     protected void initMvp() {
     }
 
-    protected void initView(View view) {
+    protected void initView() {
     }
 
     protected void initData() {

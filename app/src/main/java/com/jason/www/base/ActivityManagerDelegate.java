@@ -207,6 +207,13 @@ public class ActivityManagerDelegate {
         }
     }
 
+    public int getActivityStackSize() {
+        if (mActivityStack != null) {
+            return mActivityStack.size();
+        }
+        return 0;
+    }
+
     /**
      * 退出应用程序
      */

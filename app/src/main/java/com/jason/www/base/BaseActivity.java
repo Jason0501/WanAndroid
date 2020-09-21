@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         beforeSetContentView();
         setContentView(getLayoutResId());
-        ActivityStackManager.getInstance().addActivity(this);
+        ActivityManagerDelegate.getInstance().addActivity(this);
         unbinder = ButterKnife.bind(this);
         initMvp();
         initView(getWindow().getDecorView());
@@ -92,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityStackManager.getInstance().finishActivity(this);
+        ActivityManagerDelegate.getInstance().finishActivity(this);
         unbinder.unbind();
         unbinder = null;
     }
