@@ -31,8 +31,8 @@ public class WebViewActivity extends BaseActivity {
     private String mUrl;
 
     @Override
-    protected void initView(View decorView) {
-        super.initView(decorView);
+    protected void initView() {
+        super.initView();
         initWebView();
     }
 

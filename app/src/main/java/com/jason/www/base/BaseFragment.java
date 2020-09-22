@@ -33,9 +33,14 @@ public abstract class BaseFragment extends LazyFragment {
     @Override
     protected void initView() {
         super.initView();
+        initImmersionBar();
         if (isRegisterEventBus()) {
             EventBus.getDefault().register(this);
         }
+    }
+
+    protected void initImmersionBar() {
+
     }
 
     @Override

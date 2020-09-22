@@ -49,6 +49,14 @@ public class GlideUtils {
         return options.error(R.drawable.default_avatar);
     }
 
+    public static void pauseLoad() {
+        with().pauseRequests();
+    }
+
+    public static void resumeLoad() {
+        with().resumeRequests();
+    }
+
     public static void loadAvatar(ImageView imageView, String imgUrl) {
         RequestBuilder<Drawable> requestBuilder = load(imgUrl);
         setAvatarConfiguration(requestBuilder);

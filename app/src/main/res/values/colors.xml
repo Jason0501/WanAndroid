@@ -3,7 +3,7 @@
     <color name="theme_color">#04BE02</color>
     <color name="colorPrimary">@color/theme_color</color>
     <color name="colorPrimaryDark">@color/theme_color</color>
-    <color name="colorAccent">@color/theme_color</color>
+    <color name="colorAccent">#5fac5a</color>
     <color name="windows_background">#f0f0f0</color>
     <!--文本用色-->
     <color name="textcolor_black">#333333</color>
@@ -12,6 +12,7 @@
     <!--常用色-->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="transparent">#0000</color>
     <color name="trans_6">#6000</color>
 
     <!--分割线的颜色-->

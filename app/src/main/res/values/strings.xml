@@ -28,5 +28,9 @@
     <string name="format_user_rank" formatted="false">排行:%d</string>
     <string name="format_user_level" formatted="false">等级:%d</string>
 
+    <string name="home">首页</string>
+    <string name="question">问答</string>
+    <string name="frequent_web_site">热门网站</string>
+    <string name="mine">我的</string>
 
 </resources>

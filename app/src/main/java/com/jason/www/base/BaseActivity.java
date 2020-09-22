@@ -3,8 +3,10 @@ package com.jason.www.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
+
+import com.gyf.immersionbar.BarHide;
+import com.gyf.immersionbar.ImmersionBar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,16 +36,35 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
         ActivityManagerDelegate.getInstance().addActivity(this);
         unbinder = ButterKnife.bind(this);
+        initImmersionBar();
         initMvp();
-        initView(getWindow().getDecorView());
+        initView();
         initData();
         initEvent();
+    }
+
+    protected void hideStatusBar() {
+        ImmersionBar.with(this)
+                .hideBar(BarHide.FLAG_HIDE_BAR)
+                .init();
+    }
+
+    protected void showStatusBar() {
+        ImmersionBar.with(this)
+                .hideBar(BarHide.FLAG_SHOW_BAR)
+                .init();
+    }
+
+    protected void initImmersionBar() {
+        //设置共同沉浸式样式
+        ImmersionBar.with(this)
+                .init();
     }
 
     protected void initMvp() {
     }
 
-    protected void initView(View decorView) {
+    protected void initView() {
     }
 
     protected void initData() {

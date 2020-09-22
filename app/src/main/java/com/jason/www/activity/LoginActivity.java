@@ -31,8 +31,8 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
     }
 
     @Override
-    protected void initView(View decorView) {
-        super.initView(decorView);
+    protected void initView() {
+        super.initView();
         edittextUsername.setText("不良少年");
         edittextPassword.setText("123456");
     }

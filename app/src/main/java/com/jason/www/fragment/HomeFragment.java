@@ -3,9 +3,11 @@ package com.jason.www.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.adapter.HomeBannerAdapter;
@@ -15,6 +17,7 @@ import com.jason.www.http.response.HomeBanner;
 import com.jason.www.mvp.contract.MainContract;
 import com.jason.www.mvp.presenter.MainPresenter;
 import com.jason.www.utils.DisplayUtils;
+import com.jason.www.utils.GlideUtils;
 import com.jason.www.utils.IntentUtils;
 import com.jason.www.widget.CommonItemDecoration;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -28,6 +31,7 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -39,19 +43,32 @@ import butterknife.BindView;
  * @description:
  */
 public class HomeFragment extends BaseMvpFragment<MainPresenter> implements MainContract.View {
+    @BindView(R.id.linearlayout_title)
+    LinearLayout linearLayoutToolBar;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     Banner mBanner;
     private HomeAdapter mHomeAdapter;
     private boolean mIsRefresh;
     private int mPage;
+    private int mBannerHeight;
 
     @Override
     protected void initView() {
         super.initView();
         initRecyclerView();
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        ImmersionBar.with(this)
+                .titleBar(toolbar)
+                .init();
     }
 
     private void initRecyclerView() {
@@ -66,6 +83,31 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     @Override
     protected void initEvent() {
         super.initEvent();
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int mTotalDy;
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    GlideUtils.resumeLoad();
+                } else {
+                    GlideUtils.pauseLoad();
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mTotalDy += dy;
+                if (mTotalDy <= mBannerHeight) {
+                    float alpha = (float) mTotalDy / mBannerHeight;
+                    toolbar.setAlpha(alpha);
+                } else {
+                    toolbar.setAlpha(1);
+                }
+            }
+        });
         mHomeAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view,
@@ -103,10 +145,11 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     private void initBanner() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.header_home, null);
         mBanner = view.findViewById(R.id.banner_home);
-        int width = DisplayUtils.realWidth();
+        int bannerWidth = DisplayUtils.realWidth();
+        mBannerHeight = bannerWidth * 5 / 9;
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mBanner.getLayoutParams();
-        layoutParams.width = width;
-        layoutParams.height = width * 5 / 9;
+        layoutParams.width = bannerWidth;
+        layoutParams.height = mBannerHeight;
         mBanner.setLayoutParams(layoutParams);
         HomeBannerAdapter bannerAdapter = new HomeBannerAdapter();
         mBanner.setAdapter(bannerAdapter);

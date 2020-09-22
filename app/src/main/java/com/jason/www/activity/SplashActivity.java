@@ -1,6 +1,5 @@
 package com.jason.www.activity;
 
-import android.view.View;
 import android.widget.ImageView;
 
 import com.jason.www.R;
@@ -13,8 +12,8 @@ public class SplashActivity extends BaseActivity {
     ImageView imageView;
 
     @Override
-    protected void initView(View decorView) {
-        super.initView(decorView);
+    protected void initView() {
+        super.initView();
         imageView.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -1,7 +1,6 @@
 package com.jason.www.activity;
 
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -30,8 +29,8 @@ public class RegisterActivity extends BaseMvpActivity<RegisterPresenter> impleme
     }
 
     @Override
-    protected void initView(View decorView) {
-        super.initView(decorView);
+    protected void initView() {
+        super.initView();
         edittextUsername.setText("不良少年");
         edittextPassword.setText("123456");
         edittextRepassword.setText(edittextPassword.getText());

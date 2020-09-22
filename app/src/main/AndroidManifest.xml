@@ -19,9 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/FullScreenTheme">
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,19 +39,19 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/activity_main"
-            android:theme="@style/FullScreenTheme" />
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+            android:label="@string/activity_main" />
         <activity
             android:name=".activity.LoginActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:label="@string/activity_login"
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity
             android:name=".activity.RegisterActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
             android:label="@string/activity_register"
             android:windowSoftInputMode="adjustPan|stateVisible" />
-        <activity
-            android:name=".activity.WebViewActivity"
-            android:theme="@style/FullScreenTheme" />
+        <activity android:name=".activity.WebViewActivity" />
     </application>
 
 </manifest>

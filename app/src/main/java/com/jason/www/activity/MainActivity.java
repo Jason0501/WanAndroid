@@ -34,8 +34,8 @@ public class MainActivity extends BaseActivity {
     private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
-    protected void initView(View decorView) {
-        super.initView(decorView);
+    protected void initView() {
+        super.initView();
         initViewPager();
     }
 

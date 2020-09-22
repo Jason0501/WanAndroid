@@ -42,22 +42,33 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    //view绑定
     implementation 'com.jakewharton:butterknife:10.2.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.2'
-
+    //网络请求库
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    //recyclerview适配器
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    //图片加载
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    //json解析
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
-    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    //下拉刷新
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'
+    //动态授权
     implementation "org.permissionsdispatcher:permissionsdispatcher:4.7.0"
     annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:4.7.0"
+    //轮播图
     implementation 'com.youth.banner:banner:2.1.0'
+    //tab指示器
     implementation 'com.github.hackware1993:MagicIndicator:1.6.0'
+    //万能的shape
     implementation 'com.noober.background:core:1.6.5'
+    //事件总线
     implementation 'org.greenrobot:eventbus:3.2.0'
+    //状态栏管理
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 }
