@@ -43,7 +43,7 @@
                     android:layout_below="@+id/civ_user_icon"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin_large"
-                    android:textColor="@color/textcolor_black"
+                    android:textColor="@color/textcolor_black333"
                     android:textSize="@dimen/textsize_xxlarge"
                     android:textStyle="bold"
                     tools:text="Jason" />
@@ -55,7 +55,7 @@
                     android:layout_below="@+id/tv_user_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin_small"
-                    android:textColor="@color/textcolor_black"
+                    android:textColor="@color/textcolor_black333"
                     android:textSize="@dimen/textsize_middle"
                     tools:text="ID:-----" />
 
@@ -72,7 +72,7 @@
                         android:id="@+id/tv_user_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle"
                         tools:text="等级：15" />
 
@@ -81,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/margin_large"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle"
                         tools:text="排名：71" />
 
@@ -121,14 +121,14 @@
                         android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
                         android:text="@string/my_integral"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle" />
 
                     <TextView
                         android:id="@+id/tv_coin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textcolor_light_grey"
+                        android:textColor="@color/textcolor_black999"
                         android:textSize="@dimen/textsize_small"
                         tools:text="520" />
 
@@ -160,7 +160,7 @@
                         android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
                         android:text="@string/my_share"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle" />
 
                     <ImageView
@@ -196,7 +196,7 @@
                         android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
                         android:text="@string/my_collection"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle" />
 
                     <ImageView
@@ -232,7 +232,7 @@
                         android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
                         android:text="@string/reading_history"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle" />
 
                     <ImageView
@@ -268,17 +268,17 @@
                         android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
                         android:text="@string/about_author"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/buy_him_a_cup_of_coffee"
-                        android:textColor="@color/textcolor_light_grey"
+                        android:textColor="@color/textcolor_black999"
                         android:textSize="@dimen/textsize_small"
                         app:bl_pressed_textColor="@color/pressed_text_color"
-                        app:bl_unPressed_textColor="@color/textcolor_light_grey" />
+                        app:bl_unPressed_textColor="@color/textcolor_black999" />
 
                 </LinearLayout>
 
@@ -308,7 +308,7 @@
                         android:layout_marginRight="@dimen/margin_large"
                         android:layout_weight="1"
                         android:text="@string/system_settings"
-                        android:textColor="@color/textcolor_black"
+                        android:textColor="@color/textcolor_black333"
                         android:textSize="@dimen/textsize_middle" />
 
                     <ImageView
@@ -328,7 +328,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:text="@string/login_out"
-                android:textColor="@color/textcolor_black"
+                android:textColor="@color/textcolor_black333"
                 android:textSize="@dimen/textsize_middle"
                 app:bl_pressed_solid_color="@color/pressed_bg_color"
                 app:bl_unPressed_solid_color="@color/unpressed_bg_color" />

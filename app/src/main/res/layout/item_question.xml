@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/textcolor_dark_grey"
+            android:textColor="@color/textcolor_black666"
             android:textSize="@dimen/textsize_xsmall"
             tools:text="鸿洋" />
 
@@ -42,7 +42,7 @@
             android:ellipsize="end"
             android:gravity="right"
             android:maxLines="1"
-            android:textColor="@color/textcolor_dark_grey"
+            android:textColor="@color/textcolor_black666"
             android:textSize="@dimen/textsize_xsmall"
             tools:text="2020.09.16 20:56" />
     </LinearLayout>
@@ -54,7 +54,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/textcolor_black"
+        android:textColor="@color/textcolor_black333"
         android:textSize="@dimen/textsize_middle"
         tools:text="鸿洋" />
 
@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textColor="@color/textcolor_dark_grey"
+        android:textColor="@color/textcolor_black666"
         android:textSize="@dimen/textsize_small"
         tools:text="鸿洋" />
 
@@ -76,7 +76,7 @@
         android:layout_marginTop="@dimen/margin_small"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/textcolor_light_grey"
+        android:textColor="@color/textcolor_black999"
         android:textSize="@dimen/textsize_small"
         tools:text="鸿洋" />
 

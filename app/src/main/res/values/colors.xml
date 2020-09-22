@@ -6,14 +6,16 @@
     <color name="colorAccent">#5fac5a</color>
     <color name="windows_background">#f0f0f0</color>
     <!--文本用色-->
-    <color name="textcolor_black">#333333</color>
-    <color name="textcolor_dark_grey">#666666</color>
-    <color name="textcolor_light_grey">#999999</color>
+    <color name="textcolor_black333">#333333</color>
+    <color name="textcolor_black666">#666666</color>
+    <color name="textcolor_black999">#999999</color>
+    <color name="textcolor_blackccc">#cccccc</color>
     <!--常用色-->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#0000</color>
     <color name="trans_6">#6000</color>
+    <color name="orange">#f86734</color>
 
     <!--分割线的颜色-->
     <color name="divider">@color/windows_background</color>
@@ -23,6 +25,10 @@
     <color name="unpressed_bg_color">@color/white</color>
     <!--按下去的文本色-->
     <color name="pressed_text_color">#e0e0e0</color>
+    <!--按下去的边框色-->
+    <color name="pressed_stroke_color">#48ff46</color>
+    <!--松开的边框色-->
+    <color name="unpressed_stroke_color">@color/theme_color</color>
     <!--遮罩颜色-->
     <color name="blur_mask">#11000000</color>
 </resources>

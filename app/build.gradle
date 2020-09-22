@@ -71,4 +71,6 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     //状态栏管理
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    //cookie
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 }

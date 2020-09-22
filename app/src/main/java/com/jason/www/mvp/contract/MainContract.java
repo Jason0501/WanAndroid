@@ -20,17 +20,29 @@ public interface MainContract {
         public abstract void getBannerHome(IRequestCallback callback);
 
         public abstract void getHomeArticles(int page, IRequestCallback callback);
+
+        public abstract void addCollection(int articleId, IRequestCallback callback);
+
+        public abstract void cancelCollection(int articleId, IRequestCallback callback);
     }
 
     interface View extends IBaseView {
         void successGetBanner(List<HomeBanner> list);
 
         void successGetHomeArticles(HomeArticleBody homeArticleBody);
+
+        void successAddCollection();
+
+        void successCancelCollection();
     }
 
     abstract class Presenter extends IBasePresenter<MainContract.Model, MainContract.View> {
         public abstract void getBannerHome();
 
         public abstract void getHomeArticles(int page);
+
+        public abstract void addCollection(int articleId);
+
+        public abstract void cancelCollection(int articleId);
     }
 }

@@ -11,4 +11,16 @@
     <style name="FullScreenTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="item_press">
+        <item name="bl_pressed_solid_color">@color/pressed_bg_color</item>
+        <item name="bl_unPressed_solid_color">@color/white</item>
+        <item name="bl_solid_color">@color/white</item>
+    </style>
+
+    <style name="text_press_color333">
+        <item name="bl_pressed_textColor">@color/pressed_text_color</item>
+        <item name="bl_unPressed_textColor">@color/textcolor_black333</item>
+    </style>
+
 </resources>

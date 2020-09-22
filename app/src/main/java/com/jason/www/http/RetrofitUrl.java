@@ -60,6 +60,25 @@ public interface RetrofitUrl {
                              @Field("password") String password);
 
     /**
+     * 收藏站内文章
+     *
+     * @param articleId
+     * @return
+     */
+    @POST("lg/collect/{id}/json")
+    Call<ResponseBody> addCollection(@Path("id") int articleId);
+
+    /**
+     * 取消收藏
+     *
+     * @param articleId
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("lg/uncollect_originId/{id}/json")
+    Call<ResponseBody> cancelCollection(@Path("id") int articleId);
+
+    /**
      * 获取首页文章列表
      *
      * @param page

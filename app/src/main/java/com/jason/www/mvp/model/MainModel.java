@@ -5,6 +5,7 @@ import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.SmartHttpCallback;
 import com.jason.www.http.response.HomeArticleBody;
 import com.jason.www.http.response.HomeBanner;
+import com.jason.www.http.response.base.BaseBean;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.mvp.callback.IRequestCallback;
 import com.jason.www.mvp.contract.MainContract;
@@ -71,6 +72,64 @@ public class MainModel extends MainContract.Model {
                 return RetrofitHelper.getApi().getHomeArticles(page);
             }
         }, new TypeToken<BaseResponse<HomeArticleBody>>() {
+        }.getType());
+    }
+
+    @Override
+    public void addCollection(int articleId, IRequestCallback callback) {
+        RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<BaseBean>>() {
+            @Override
+            public void success(BaseResponse<BaseBean> response) {
+                if (response.isOk()) {
+                    callback.success(response);
+                } else {
+                    callback.fail(response.errorMsg);
+                }
+            }
+
+            @Override
+            public void fail(int code, String msg) {
+                callback.fail(msg);
+            }
+
+            @Override
+            public void finish() {
+            }
+
+            @Override
+            public Call<ResponseBody> getApi() {
+                return RetrofitHelper.getApi().addCollection(articleId);
+            }
+        }, new TypeToken<BaseResponse<BaseBean>>() {
+        }.getType());
+    }
+
+    @Override
+    public void cancelCollection(int articleId, IRequestCallback callback) {
+        RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<BaseBean>>() {
+            @Override
+            public void success(BaseResponse<BaseBean> response) {
+                if (response.isOk()) {
+                    callback.success(response);
+                } else {
+                    callback.fail(response.errorMsg);
+                }
+            }
+
+            @Override
+            public void fail(int code, String msg) {
+                callback.fail(msg);
+            }
+
+            @Override
+            public void finish() {
+            }
+
+            @Override
+            public Call<ResponseBody> getApi() {
+                return RetrofitHelper.getApi().cancelCollection(articleId);
+            }
+        }, new TypeToken<BaseResponse<BaseBean>>() {
         }.getType());
     }
 }

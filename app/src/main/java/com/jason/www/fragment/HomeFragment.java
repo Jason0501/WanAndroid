@@ -6,6 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
@@ -116,6 +117,25 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
                 IntentUtils.goToWebViewActivity(homeArticle.getLink());
             }
         });
+        mHomeAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                switch (view.getId()) {
+                    case R.id.iv_collect:
+                        HomeArticleBody.HomeArticle article = mHomeAdapter.getData().get(position);
+                        if (!article.isCollect()) {
+                            getPresenter().addCollection(article.getId());
+                        } else {
+                            getPresenter().cancelCollection(article.getId());
+                        }
+                        article.setCollect(!article.isCollect());
+                        mHomeAdapter.notifyItemChanged(position);
+                        break;
+                    case R.id.tv_author:
+                        break;
+                }
+            }
+        });
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
@@ -184,6 +204,16 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
             mHomeAdapter.addData(homeArticleBody.getDatas());
         }
         mIsRefresh = false;
+    }
+
+    @Override
+    public void successAddCollection() {
+        showToast("收藏成功");
+    }
+
+    @Override
+    public void successCancelCollection() {
+        showToast("成功取消收藏");
     }
 
     @Override

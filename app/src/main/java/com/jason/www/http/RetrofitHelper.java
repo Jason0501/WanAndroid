@@ -1,5 +1,10 @@
 package com.jason.www.http;
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.jason.www.config.AppData;
 import com.jason.www.http.response.base.BaseResponse;
 
 import java.lang.reflect.Type;
@@ -19,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitHelper {
     private static Retrofit retrofit;
+    private static ClearableCookieJar cookieJar;
 
     private RetrofitHelper() {
     }
@@ -49,15 +55,30 @@ public class RetrofitHelper {
      */
     private static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.cookieJar(getCookieJar());
         //持久化保存cookies
-        builder.addInterceptor(new ReceiveCookiesInterceptor());
-        builder.addInterceptor(new AddCookiesInterceptor());
+//        builder.addInterceptor(new ReceiveCookiesInterceptor());
+//        builder.addInterceptor(new AddCookiesInterceptor());
         //忽略https证书验证，允许抓包
         builder.sslSocketFactory(SSLFactory.createSSLSocketFactory(), new SSLFactory.TrustAllManager());
         builder.hostnameVerifier(new SSLFactory.TrustAllHostnameVerifier());
         builder.callTimeout(7000, TimeUnit.MILLISECONDS);
         OkHttpClient client = builder.build();
         return client;
+    }
+
+    private static ClearableCookieJar getCookieJar() {
+        if (cookieJar == null) {
+            cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(AppData.getContext()));
+        }
+        return cookieJar;
+    }
+
+    public static void clearCookie() {
+        if (cookieJar != null) {
+            cookieJar.clear();
+            cookieJar = null;
+        }
     }
 
     public static RetrofitUrl getApi() {

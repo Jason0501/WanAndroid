@@ -12,6 +12,7 @@ import com.jason.www.activity.LoginActivity;
 import com.jason.www.base.BaseMvpFragment;
 import com.jason.www.config.Accounts;
 import com.jason.www.event.LoginEvent;
+import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.response.UserInfo;
 import com.jason.www.mvp.contract.MineContract;
 import com.jason.www.mvp.presenter.MinePresenter;
@@ -182,6 +183,7 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Accounts.loginOut();
+                        RetrofitHelper.clearCookie();
                         bindView();
                     }
                 }).create().show();
