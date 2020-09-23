@@ -11,5 +11,5 @@ import com.jason.www.http.response.base.BaseResponse;
 public interface IRequestCallback<T> {
     void success(BaseResponse<T> response);
 
-    void fail(String msg);
+    void fail(String errorMsg);
 }

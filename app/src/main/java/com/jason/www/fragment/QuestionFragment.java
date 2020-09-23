@@ -18,6 +18,7 @@ import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -36,6 +37,13 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
     private QuestionAdapter mAdapter;
     private int mPage;
     private boolean mIsRefresh;
+
+    private QuestionFragment() {
+    }
+
+    public static Fragment getInstance() {
+        return new QuestionFragment();
+    }
 
     @Override
     protected void initView() {

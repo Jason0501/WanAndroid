@@ -3,17 +3,14 @@ package com.jason.www.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
 import com.jason.www.adapter.HomeAdapter;
 import com.jason.www.adapter.HomeBannerAdapter;
 import com.jason.www.base.BaseMvpFragment;
-import com.jason.www.http.response.HomeArticleBody;
+import com.jason.www.http.Article;
+import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.HomeBanner;
 import com.jason.www.mvp.contract.MainContract;
 import com.jason.www.mvp.presenter.MainPresenter;
@@ -33,6 +30,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -44,8 +42,6 @@ import butterknife.BindView;
  * @description:
  */
 public class HomeFragment extends BaseMvpFragment<MainPresenter> implements MainContract.View {
-    @BindView(R.id.linearlayout_title)
-    LinearLayout linearLayoutToolBar;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
@@ -58,6 +54,13 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     private int mPage;
     private int mBannerHeight;
 
+    private HomeFragment() {
+    }
+
+    public static Fragment getInstance() {
+        return new HomeFragment();
+    }
+
     @Override
     protected void initView() {
         super.initView();
@@ -68,7 +71,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     protected void initImmersionBar() {
         super.initImmersionBar();
         ImmersionBar.with(this)
-                .titleBar(toolbar)
+                .titleBar(R.id.toolbar)
                 .init();
     }
 
@@ -109,31 +112,15 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
                 }
             }
         });
-        mHomeAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mHomeAdapter.setOnCollectListener(new HomeAdapter.OnCollectListener() {
             @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view,
-                                    int position) {
-                HomeArticleBody.HomeArticle homeArticle = mHomeAdapter.getData().get(position);
-                IntentUtils.goToWebViewActivity(homeArticle.getLink());
+            public void addCollect(Article article) {
+                getPresenter().addCollection(article.id);
             }
-        });
-        mHomeAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
+
             @Override
-            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
-                switch (view.getId()) {
-                    case R.id.iv_collect:
-                        HomeArticleBody.HomeArticle article = mHomeAdapter.getData().get(position);
-                        if (!article.isCollect()) {
-                            getPresenter().addCollection(article.getId());
-                        } else {
-                            getPresenter().cancelCollection(article.getId());
-                        }
-                        article.setCollect(!article.isCollect());
-                        mHomeAdapter.notifyItemChanged(position);
-                        break;
-                    case R.id.tv_author:
-                        break;
-                }
+            public void cancelCollect(Article article) {
+                getPresenter().cancelCollection(article.id);
             }
         });
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -195,13 +182,13 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     }
 
     @Override
-    public void successGetHomeArticles(HomeArticleBody homeArticleBody) {
+    public void successGetHomeArticles(BaseListResponse<Article> baseListResponse) {
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
         if (mIsRefresh) {
-            mHomeAdapter.setList(homeArticleBody.datas);
+            mHomeAdapter.setList(baseListResponse.datas);
         } else {
-            mHomeAdapter.addData(homeArticleBody.getDatas());
+            mHomeAdapter.addData(baseListResponse.getDatas());
         }
         mIsRefresh = false;
     }
@@ -214,6 +201,12 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     @Override
     public void successCancelCollection() {
         showToast("成功取消收藏");
+    }
+
+    @Override
+    public void failLoad(String msg) {
+        super.failLoad(msg);
+        smartRefreshLayout.finishRefresh(false);
     }
 
     @Override

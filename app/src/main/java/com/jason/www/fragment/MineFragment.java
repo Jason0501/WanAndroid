@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jason.www.R;
+import com.jason.www.activity.CollectionActivity;
 import com.jason.www.activity.LoginActivity;
 import com.jason.www.base.BaseMvpFragment;
 import com.jason.www.config.Accounts;
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -71,6 +73,13 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
     LinearLayout llSetting;
     @BindView(R.id.nsv)
     NestedScrollView nsv;
+
+    private MineFragment() {
+    }
+
+    public static Fragment getInstance() {
+        return new MineFragment();
+    }
 
     @Override
     protected void initView() {
@@ -162,6 +171,7 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
             case R.id.ll_share:
                 break;
             case R.id.ll_collect:
+                startActivity(CollectionActivity.class);
                 break;
             case R.id.ll_read_record:
                 break;

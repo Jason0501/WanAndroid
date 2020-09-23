@@ -1,22 +1,17 @@
 package com.jason.www.fragment;
 
-import android.view.View;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.jason.www.R;
-import com.jason.www.adapter.FrequentWebSiteAdapter;
+import com.jason.www.adapter.CollectionAdapter;
 import com.jason.www.base.BaseMvpFragment;
-import com.jason.www.http.response.FrequentWebSite;
-import com.jason.www.mvp.contract.FrequentWebSiteContract;
-import com.jason.www.mvp.presenter.FrequentWebSitePresenter;
-import com.jason.www.utils.IntentUtils;
+import com.jason.www.http.response.BaseListResponse;
+import com.jason.www.http.response.Collect;
+import com.jason.www.mvp.contract.CollectionContract;
+import com.jason.www.mvp.presenter.CollectionPresenter;
 import com.jason.www.widget.CommonItemDecoration;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
-
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,18 +25,20 @@ import butterknife.BindView;
  * @email：575569745@qq.com
  * @description:
  */
-public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePresenter> implements FrequentWebSiteContract.View {
+public class CollectionFragment extends BaseMvpFragment<CollectionPresenter> implements CollectionContract.View {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartrefreshlayout;
-    private FrequentWebSiteAdapter mAdapter;
+    private CollectionAdapter mAdapter;
+    private int mPage;
+    private boolean mIsRefresh;
 
-    private FrequentWebSiteFragment() {
+    private CollectionFragment() {
     }
 
     public static Fragment getInstance() {
-        return new FrequentWebSiteFragment();
+        return new CollectionFragment();
     }
 
     @Override
@@ -50,15 +47,14 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
-        mAdapter = new FrequentWebSiteAdapter();
+        mAdapter = new CollectionAdapter();
         recyclerview.setAdapter(mAdapter);
-        smartrefreshlayout.setEnableLoadMore(false);
     }
 
     @Override
     protected void initData() {
         super.initData();
-        getPresenter().getFrequentWebSite();
+        getPresenter().getArticleCollection(mPage);
     }
 
     @Override
@@ -67,21 +63,22 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
         smartrefreshlayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mIsRefresh = true;
+                mPage = 0;
                 initData();
             }
         });
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+        smartrefreshlayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view,
-                                    int position) {
-                IntentUtils.goToWebViewActivity(mAdapter.getData().get(position).getLink());
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                getPresenter().getArticleCollection(++mPage);
             }
         });
     }
 
     @Override
-    protected FrequentWebSitePresenter createPresenter() {
-        return new FrequentWebSitePresenter();
+    protected CollectionPresenter createPresenter() {
+        return new CollectionPresenter();
     }
 
     @Override
@@ -90,8 +87,29 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
     }
 
     @Override
-    public void successGetFrequentWebSite(List<FrequentWebSite> list) {
-        mAdapter.setList(list);
+    public void successGetArticleCollection(BaseListResponse<Collect> response) {
         smartrefreshlayout.finishRefresh();
+        smartrefreshlayout.finishLoadMore();
+        if (mIsRefresh) {
+            mAdapter.setList(response.datas);
+        } else {
+            mAdapter.addData(response.datas);
+        }
+        mIsRefresh = false;
+    }
+
+    @Override
+    public void successGetWebSiteCollection(BaseListResponse<Collect> response) {
+
+    }
+
+    @Override
+    public void successAddCollection() {
+
+    }
+
+    @Override
+    public void successCancelCollection() {
+
     }
 }

@@ -28,7 +28,8 @@
     <dimen name="radius_small">3dp</dimen>
     <dimen name="radius_large">7dp</dimen>
     <!--首页底部Tab栏的高度-->
-    <dimen name="home_bottom_navigator_height">50dp</dimen>
+    <dimen name="default_navigatorbar_height">50dp</dimen>
+    <dimen name="default_toolbar_height">45dp</dimen>
     <!--分割线的粗细-->
     <dimen name="divider_line_horizontal_height">1dp</dimen>
 

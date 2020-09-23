@@ -8,6 +8,11 @@
     android:orientation="vertical"
     tools:context=".activity.WebViewActivity">
 
+    <View
+        android:id="@+id/statusbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
     <ProgressBar
         android:id="@+id/progressbar"
         style="@android:style/Widget.ProgressBar.Horizontal"

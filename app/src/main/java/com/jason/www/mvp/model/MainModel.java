@@ -1,9 +1,10 @@
 package com.jason.www.mvp.model;
 
 import com.google.gson.reflect.TypeToken;
+import com.jason.www.http.Article;
 import com.jason.www.http.RetrofitHelper;
 import com.jason.www.http.SmartHttpCallback;
-import com.jason.www.http.response.HomeArticleBody;
+import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.HomeBanner;
 import com.jason.www.http.response.base.BaseBean;
 import com.jason.www.http.response.base.BaseResponse;
@@ -48,9 +49,9 @@ public class MainModel extends MainContract.Model {
 
     @Override
     public void getHomeArticles(int page, IRequestCallback callback) {
-        RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<HomeArticleBody>>() {
+        RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<BaseListResponse<Article>>>() {
             @Override
-            public void success(BaseResponse<HomeArticleBody> response) {
+            public void success(BaseResponse<BaseListResponse<Article>> response) {
                 if (response.isOk()) {
                     callback.success(response);
                 } else {
@@ -71,7 +72,7 @@ public class MainModel extends MainContract.Model {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().getHomeArticles(page);
             }
-        }, new TypeToken<BaseResponse<HomeArticleBody>>() {
+        }, new TypeToken<BaseResponse<BaseListResponse<Article>>>() {
         }.getType());
     }
 
@@ -90,10 +91,6 @@ public class MainModel extends MainContract.Model {
             @Override
             public void fail(int code, String msg) {
                 callback.fail(msg);
-            }
-
-            @Override
-            public void finish() {
             }
 
             @Override
@@ -119,10 +116,6 @@ public class MainModel extends MainContract.Model {
             @Override
             public void fail(int code, String msg) {
                 callback.fail(msg);
-            }
-
-            @Override
-            public void finish() {
             }
 
             @Override

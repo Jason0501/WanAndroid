@@ -74,7 +74,6 @@ public interface RetrofitUrl {
      * @param articleId
      * @return
      */
-    @FormUrlEncoded
     @POST("lg/uncollect_originId/{id}/json")
     Call<ResponseBody> cancelCollection(@Path("id") int articleId);
 
@@ -86,6 +85,15 @@ public interface RetrofitUrl {
      */
     @GET("article/list/{page}/json")
     Call<ResponseBody> getHomeArticles(@Path("page") int page);
+
+    /**
+     * 获取站内文章收藏
+     *
+     * @param page
+     * @return
+     */
+    @GET("lg/collect/list/{page}/json")
+    Call<ResponseBody> getCollection(@Path("page") int page);
 
     /**
      * 获取常用网站

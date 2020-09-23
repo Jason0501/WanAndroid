@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
+        android:id="@id/tablayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_bottom_navigator_height"
+        android:layout_height="@dimen/default_navigatorbar_height"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:background="@color/white"
@@ -22,7 +22,7 @@
         android:layout_above="@id/tablayout" />
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+        android:id="@id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/divider" />

@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
 import com.jason.www.base.BaseActivity;
 import com.jason.www.config.Constants;
@@ -34,6 +35,15 @@ public class WebViewActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         initWebView();
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        ImmersionBar.with(this)
+                .statusBarView(R.id.statusbar)
+                .statusBarDarkFont(true)
+                .init();
     }
 
     @Override

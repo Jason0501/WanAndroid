@@ -42,10 +42,10 @@ public class MainActivity extends BaseActivity {
     private void initViewPager() {
         String[] titles = getResources().getStringArray(R.array.home_tab_title);
         mTitleList = Arrays.asList(titles);
-        mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new QuestionFragment());
-        mFragmentList.add(new FrequentWebSiteFragment());
-        mFragmentList.add(new MineFragment());
+        mFragmentList.add(HomeFragment.getInstance());
+        mFragmentList.add(QuestionFragment.getInstance());
+        mFragmentList.add(FrequentWebSiteFragment.getInstance());
+        mFragmentList.add(MineFragment.getInstance());
         viewpager.setOffscreenPageLimit(mFragmentList.size() - 1);
         BasePagerAdapter adapter = new BasePagerAdapter(mActivity.getSupportFragmentManager(),
                 mFragmentList, mTitleList);
