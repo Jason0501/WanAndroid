@@ -6,14 +6,14 @@ import android.widget.FrameLayout;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
-import com.jason.www.adapter.HomeAdapter;
+import com.jason.www.adapter.ArticleAdapter;
 import com.jason.www.adapter.HomeBannerAdapter;
 import com.jason.www.base.BaseMvpFragment;
 import com.jason.www.http.Article;
 import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.HomeBanner;
-import com.jason.www.mvp.contract.MainContract;
-import com.jason.www.mvp.presenter.MainPresenter;
+import com.jason.www.mvp.contract.ArticleContract;
+import com.jason.www.mvp.presenter.ArticlePresenter;
 import com.jason.www.utils.DisplayUtils;
 import com.jason.www.utils.GlideUtils;
 import com.jason.www.utils.IntentUtils;
@@ -41,15 +41,15 @@ import butterknife.BindView;
  * @email：1129847330@qq.com
  * @description:
  */
-public class HomeFragment extends BaseMvpFragment<MainPresenter> implements MainContract.View {
+public class HomeFragment extends BaseMvpFragment<ArticlePresenter> implements ArticleContract.View {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
-    SmartRefreshLayout smartRefreshLayout;
-    @BindView(R.id.toolbar)
+    SmartRefreshLayout smartrefreshlayout;
+    @BindView(R.id.default_toolbar_toolbar)
     Toolbar toolbar;
     Banner mBanner;
-    private HomeAdapter mHomeAdapter;
+    private ArticleAdapter mArticleAdapter;
     private boolean mIsRefresh;
     private int mPage;
     private int mBannerHeight;
@@ -71,7 +71,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     protected void initImmersionBar() {
         super.initImmersionBar();
         ImmersionBar.with(this)
-                .titleBar(R.id.toolbar)
+                .titleBar(R.id.default_toolbar_toolbar)
                 .init();
     }
 
@@ -79,9 +79,9 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(manager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
-        mHomeAdapter = new HomeAdapter();
+        mArticleAdapter = new ArticleAdapter();
         initBanner();
-        recyclerview.setAdapter(mHomeAdapter);
+        recyclerview.setAdapter(mArticleAdapter);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
                 }
             }
         });
-        mHomeAdapter.setOnCollectListener(new HomeAdapter.OnCollectListener() {
+        mArticleAdapter.setOnCollectListener(new ArticleAdapter.OnCollectListener() {
             @Override
             public void addCollect(Article article) {
                 getPresenter().addCollection(article.id);
@@ -123,7 +123,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
                 getPresenter().cancelCollection(article.id);
             }
         });
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        smartrefreshlayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mIsRefresh = true;
@@ -133,7 +133,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
             }
         });
 
-        smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+        smartrefreshlayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 loadMoreArticle();
@@ -162,7 +162,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
         mBanner.setAdapter(bannerAdapter);
         mBanner.addBannerLifecycleObserver(this);
         mBanner.setIndicator(new CircleIndicator(mContext), true);
-        mHomeAdapter.addHeaderView(view);
+        mArticleAdapter.addHeaderView(view);
     }
 
     private void loadMoreArticle() {
@@ -182,13 +182,20 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     }
 
     @Override
-    public void successGetHomeArticles(BaseListResponse<Article> baseListResponse) {
-        smartRefreshLayout.finishRefresh();
-        smartRefreshLayout.finishLoadMore();
+    public void successGetHomeArticles(BaseListResponse<Article> response) {
+        smartrefreshlayout.finishRefresh();
+        smartrefreshlayout.finishLoadMore();
+        if (response.isOver()) {
+            if (mIsRefresh) {
+                smartrefreshlayout.finishRefreshWithNoMoreData();
+            } else {
+                smartrefreshlayout.finishLoadMoreWithNoMoreData();
+            }
+        }
         if (mIsRefresh) {
-            mHomeAdapter.setList(baseListResponse.datas);
+            mArticleAdapter.setList(response.datas);
         } else {
-            mHomeAdapter.addData(baseListResponse.getDatas());
+            mArticleAdapter.addData(response.getDatas());
         }
         mIsRefresh = false;
     }
@@ -206,7 +213,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     @Override
     public void failLoad(String msg) {
         super.failLoad(msg);
-        smartRefreshLayout.finishRefresh(false);
+        smartrefreshlayout.finishRefresh(false);
     }
 
     @Override
@@ -215,7 +222,7 @@ public class HomeFragment extends BaseMvpFragment<MainPresenter> implements Main
     }
 
     @Override
-    protected MainPresenter createPresenter() {
-        return new MainPresenter();
+    protected ArticlePresenter createPresenter() {
+        return new ArticlePresenter();
     }
 }

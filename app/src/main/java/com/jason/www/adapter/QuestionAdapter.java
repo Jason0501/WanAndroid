@@ -15,24 +15,23 @@ import org.jetbrains.annotations.NotNull;
  * @email：1129847330@qq.com
  * @description:
  */
-public class QuestionAdapter extends BaseQuickAdapter<Question.DatasBean, BaseViewHolder> {
+public class QuestionAdapter extends BaseQuickAdapter<Question, BaseViewHolder> {
     public QuestionAdapter() {
         super(R.layout.item_question);
     }
 
     @Override
-    protected void convert(@NotNull BaseViewHolder baseViewHolder, Question.DatasBean bean) {
-        baseViewHolder.setText(R.id.textview_author_item_question, bean.getAuthor())
-                .setText(R.id.textview_tag_item_question, bean.getTags().get(0).getName())
-                .setText(R.id.textview_date_item_question, bean.getNiceDate())
-                .setText(R.id.textview_title_item_question, bean.getTitle())
-                .setText(R.id.textview_tip_item_question, bean.getSuperChapterName() +
-                        ":" + bean.getChapterName());
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, Question question) {
+        baseViewHolder.setText(R.id.textview_author_item_question, question.getAuthor())
+                .setText(R.id.textview_tag_item_question, question.getTags().get(0).getName())
+                .setText(R.id.textview_date_item_question, question.getNiceDate())
+                .setText(R.id.textview_title_item_question, question.getTitle())
+                .setText(R.id.textview_tip_item_question, question.getSuperChapterName() + ":" + question.getChapterName());
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            baseViewHolder.setText(R.id.textview_des_item_question, Html.fromHtml(bean.getDesc(),
+            baseViewHolder.setText(R.id.textview_des_item_question, Html.fromHtml(question.getDesc(),
                     Html.FROM_HTML_MODE_COMPACT));
         } else {
-            baseViewHolder.setText(R.id.textview_des_item_question, Html.fromHtml(bean.getDesc()));
+            baseViewHolder.setText(R.id.textview_des_item_question, Html.fromHtml(question.getDesc()));
         }
     }
 }

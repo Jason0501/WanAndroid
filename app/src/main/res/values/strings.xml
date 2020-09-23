@@ -32,5 +32,6 @@
     <string name="question">问答</string>
     <string name="frequent_web_site">热门网站</string>
     <string name="mine">我的</string>
+    <string name="anonymity">匿名</string>
 
 </resources>

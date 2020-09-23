@@ -1,5 +1,6 @@
 package com.jason.www.mvp.contract;
 
+import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.Question;
 import com.jason.www.mvp.base.IBaseModel;
 import com.jason.www.mvp.base.IBasePresenter;
@@ -18,7 +19,7 @@ public interface QuestionContract {
     }
 
     interface View extends IBaseView {
-        void successGetQuestion(Question question);
+        void successGetQuestion(BaseListResponse<Question> question);
     }
 
     abstract class Presenter extends IBasePresenter<QuestionContract.Model, QuestionContract.View> {

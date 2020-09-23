@@ -13,8 +13,6 @@ import com.jason.www.mvp.presenter.FrequentWebSitePresenter;
 import com.jason.www.utils.IntentUtils;
 import com.jason.www.widget.CommonItemDecoration;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -52,7 +50,7 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
         mAdapter = new FrequentWebSiteAdapter();
         recyclerview.setAdapter(mAdapter);
-        smartrefreshlayout.setEnableLoadMore(false);
+        smartrefreshlayout.setEnablePureScrollMode(true);
     }
 
     @Override
@@ -64,12 +62,6 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
     @Override
     protected void initEvent() {
         super.initEvent();
-        smartrefreshlayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                initData();
-            }
-        });
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view,
@@ -86,12 +78,11 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_frequent_website;
+        return R.layout.layout_refresh_list;
     }
 
     @Override
     public void successGetFrequentWebSite(List<FrequentWebSite> list) {
         mAdapter.setList(list);
-        smartrefreshlayout.finishRefresh();
     }
 }

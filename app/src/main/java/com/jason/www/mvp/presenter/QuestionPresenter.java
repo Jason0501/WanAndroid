@@ -1,5 +1,6 @@
 package com.jason.www.mvp.presenter;
 
+import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.Question;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.mvp.callback.IRequestCallback;
@@ -20,9 +21,9 @@ public class QuestionPresenter extends QuestionContract.Presenter {
 
     @Override
     public void getQuestion(int page) {
-        getModel().getQuestion(page, new IRequestCallback<Question>() {
+        getModel().getQuestion(page, new IRequestCallback<BaseListResponse<Question>>() {
             @Override
-            public void success(BaseResponse<Question> response) {
+            public void success(BaseResponse<BaseListResponse<Question>> response) {
                 if (response.isOk()) {
                     getView().successGetQuestion(response.data);
                 } else {

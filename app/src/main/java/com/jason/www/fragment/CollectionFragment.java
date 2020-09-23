@@ -1,7 +1,7 @@
 package com.jason.www.fragment;
 
 import com.jason.www.R;
-import com.jason.www.adapter.CollectionAdapter;
+import com.jason.www.adapter.ArticleAdapter;
 import com.jason.www.base.BaseMvpFragment;
 import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.Collect;
@@ -30,7 +30,7 @@ public class CollectionFragment extends BaseMvpFragment<CollectionPresenter> imp
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartrefreshlayout;
-    private CollectionAdapter mAdapter;
+    private ArticleAdapter mAdapter;
     private int mPage;
     private boolean mIsRefresh;
 
@@ -47,7 +47,7 @@ public class CollectionFragment extends BaseMvpFragment<CollectionPresenter> imp
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
-        mAdapter = new CollectionAdapter();
+        mAdapter = new ArticleAdapter();
         recyclerview.setAdapter(mAdapter);
     }
 
@@ -83,13 +83,23 @@ public class CollectionFragment extends BaseMvpFragment<CollectionPresenter> imp
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_frequent_website;
+        return R.layout.layout_refresh_list;
     }
 
     @Override
     public void successGetArticleCollection(BaseListResponse<Collect> response) {
         smartrefreshlayout.finishRefresh();
         smartrefreshlayout.finishLoadMore();
+        if (response.isOver()) {
+            if (mIsRefresh) {
+                smartrefreshlayout.finishRefreshWithNoMoreData();
+            } else {
+                smartrefreshlayout.finishLoadMoreWithNoMoreData();
+            }
+        }
+        for (Collect data : response.datas) {
+            data.setCollect(true);
+        }
         if (mIsRefresh) {
             mAdapter.setList(response.datas);
         } else {

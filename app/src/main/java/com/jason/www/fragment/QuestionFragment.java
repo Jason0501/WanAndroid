@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.jason.www.R;
 import com.jason.www.adapter.QuestionAdapter;
 import com.jason.www.base.BaseMvpFragment;
+import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.Question;
 import com.jason.www.mvp.contract.QuestionContract;
 import com.jason.www.mvp.presenter.QuestionPresenter;
@@ -94,17 +95,24 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_frequent_website;
+        return R.layout.layout_refresh_list;
     }
 
     @Override
-    public void successGetQuestion(Question question) {
+    public void successGetQuestion(BaseListResponse<Question> response) {
         smartrefreshlayout.finishRefresh();
         smartrefreshlayout.finishLoadMore();
+        if (response.isOver()) {
+            if (mIsRefresh) {
+                smartrefreshlayout.finishRefreshWithNoMoreData();
+            } else {
+                smartrefreshlayout.finishLoadMoreWithNoMoreData();
+            }
+        }
         if (mIsRefresh) {
-            mAdapter.setList(question.getDatas());
+            mAdapter.setList(response.getDatas());
         } else {
-            mAdapter.addData(question.getDatas());
+            mAdapter.addData(response.getDatas());
         }
         mIsRefresh = false;
     }

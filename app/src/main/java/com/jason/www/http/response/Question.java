@@ -9,384 +9,318 @@ import java.util.List;
  * @description:
  */
 public class Question {
-    private int curPage;
-    private int offset;
-    private boolean over;
-    private int pageCount;
-    private int size;
-    private int total;
-    private List<DatasBean> datas;
+    private String apkLink;
+    private int audit;
+    private String author;
+    private boolean canEdit;
+    private int chapterId;
+    private String chapterName;
+    private boolean collect;
+    private int courseId;
+    private String desc;
+    private String descMd;
+    private String envelopePic;
+    private boolean fresh;
+    private int id;
+    private String link;
+    private String niceDate;
+    private String niceShareDate;
+    private String origin;
+    private String prefix;
+    private String projectLink;
+    private long publishTime;
+    private int realSuperChapterId;
+    private int selfVisible;
+    private long shareDate;
+    private String shareUser;
+    private int superChapterId;
+    private String superChapterName;
+    private String title;
+    private int type;
+    private int userId;
+    private int visible;
+    private int zan;
+    private List<TagsBean> tags;
 
-    public int getCurPage() {
-        return curPage;
+    public String getApkLink() {
+        return apkLink;
     }
 
-    public void setCurPage(int curPage) {
-        this.curPage = curPage;
+    public void setApkLink(String apkLink) {
+        this.apkLink = apkLink;
     }
 
-    public int getOffset() {
-        return offset;
+    public int getAudit() {
+        return audit;
     }
 
-    public void setOffset(int offset) {
-        this.offset = offset;
+    public void setAudit(int audit) {
+        this.audit = audit;
     }
 
-    public boolean isOver() {
-        return over;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setOver(boolean over) {
-        this.over = over;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public int getPageCount() {
-        return pageCount;
+    public boolean isCanEdit() {
+        return canEdit;
     }
 
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
+    public void setCanEdit(boolean canEdit) {
+        this.canEdit = canEdit;
     }
 
-    public int getSize() {
-        return size;
+    public int getChapterId() {
+        return chapterId;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setChapterId(int chapterId) {
+        this.chapterId = chapterId;
     }
 
-    public int getTotal() {
-        return total;
+    public String getChapterName() {
+        return chapterName;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setChapterName(String chapterName) {
+        this.chapterName = chapterName;
     }
 
-    public List<DatasBean> getDatas() {
-        return datas;
+    public boolean isCollect() {
+        return collect;
     }
 
-    public void setDatas(List<DatasBean> datas) {
-        this.datas = datas;
+    public void setCollect(boolean collect) {
+        this.collect = collect;
     }
 
-    public static class DatasBean {
-        private String apkLink;
-        private int audit;
-        private String author;
-        private boolean canEdit;
-        private int chapterId;
-        private String chapterName;
-        private boolean collect;
-        private int courseId;
-        private String desc;
-        private String descMd;
-        private String envelopePic;
-        private boolean fresh;
-        private int id;
-        private String link;
-        private String niceDate;
-        private String niceShareDate;
-        private String origin;
-        private String prefix;
-        private String projectLink;
-        private long publishTime;
-        private int realSuperChapterId;
-        private int selfVisible;
-        private long shareDate;
-        private String shareUser;
-        private int superChapterId;
-        private String superChapterName;
-        private String title;
-        private int type;
-        private int userId;
-        private int visible;
-        private int zan;
-        private List<TagsBean> tags;
-
-        public String getApkLink() {
-            return apkLink;
-        }
-
-        public void setApkLink(String apkLink) {
-            this.apkLink = apkLink;
-        }
-
-        public int getAudit() {
-            return audit;
-        }
-
-        public void setAudit(int audit) {
-            this.audit = audit;
-        }
-
-        public String getAuthor() {
-            return author;
-        }
-
-        public void setAuthor(String author) {
-            this.author = author;
-        }
-
-        public boolean isCanEdit() {
-            return canEdit;
-        }
-
-        public void setCanEdit(boolean canEdit) {
-            this.canEdit = canEdit;
-        }
-
-        public int getChapterId() {
-            return chapterId;
-        }
-
-        public void setChapterId(int chapterId) {
-            this.chapterId = chapterId;
-        }
-
-        public String getChapterName() {
-            return chapterName;
-        }
-
-        public void setChapterName(String chapterName) {
-            this.chapterName = chapterName;
-        }
-
-        public boolean isCollect() {
-            return collect;
-        }
-
-        public void setCollect(boolean collect) {
-            this.collect = collect;
-        }
-
-        public int getCourseId() {
-            return courseId;
-        }
-
-        public void setCourseId(int courseId) {
-            this.courseId = courseId;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-
-        public void setDesc(String desc) {
-            this.desc = desc;
-        }
-
-        public String getDescMd() {
-            return descMd;
-        }
-
-        public void setDescMd(String descMd) {
-            this.descMd = descMd;
-        }
-
-        public String getEnvelopePic() {
-            return envelopePic;
-        }
-
-        public void setEnvelopePic(String envelopePic) {
-            this.envelopePic = envelopePic;
-        }
-
-        public boolean isFresh() {
-            return fresh;
-        }
-
-        public void setFresh(boolean fresh) {
-            this.fresh = fresh;
-        }
-
-        public int getId() {
-            return id;
-        }
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getDescMd() {
+        return descMd;
+    }
+
+    public void setDescMd(String descMd) {
+        this.descMd = descMd;
+    }
+
+    public String getEnvelopePic() {
+        return envelopePic;
+    }
+
+    public void setEnvelopePic(String envelopePic) {
+        this.envelopePic = envelopePic;
+    }
+
+    public boolean isFresh() {
+        return fresh;
+    }
+
+    public void setFresh(boolean fresh) {
+        this.fresh = fresh;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getNiceDate() {
+        return niceDate;
+    }
+
+    public void setNiceDate(String niceDate) {
+        this.niceDate = niceDate;
+    }
+
+    public String getNiceShareDate() {
+        return niceShareDate;
+    }
+
+    public void setNiceShareDate(String niceShareDate) {
+        this.niceShareDate = niceShareDate;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getProjectLink() {
+        return projectLink;
+    }
+
+    public void setProjectLink(String projectLink) {
+        this.projectLink = projectLink;
+    }
+
+    public long getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(long publishTime) {
+        this.publishTime = publishTime;
+    }
+
+    public int getRealSuperChapterId() {
+        return realSuperChapterId;
+    }
+
+    public void setRealSuperChapterId(int realSuperChapterId) {
+        this.realSuperChapterId = realSuperChapterId;
+    }
+
+    public int getSelfVisible() {
+        return selfVisible;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public void setLink(String link) {
-            this.link = link;
-        }
-
-        public String getNiceDate() {
-            return niceDate;
-        }
-
-        public void setNiceDate(String niceDate) {
-            this.niceDate = niceDate;
-        }
-
-        public String getNiceShareDate() {
-            return niceShareDate;
-        }
-
-        public void setNiceShareDate(String niceShareDate) {
-            this.niceShareDate = niceShareDate;
-        }
-
-        public String getOrigin() {
-            return origin;
-        }
-
-        public void setOrigin(String origin) {
-            this.origin = origin;
-        }
-
-        public String getPrefix() {
-            return prefix;
-        }
-
-        public void setPrefix(String prefix) {
-            this.prefix = prefix;
-        }
-
-        public String getProjectLink() {
-            return projectLink;
-        }
-
-        public void setProjectLink(String projectLink) {
-            this.projectLink = projectLink;
-        }
-
-        public long getPublishTime() {
-            return publishTime;
-        }
+    public void setSelfVisible(int selfVisible) {
+        this.selfVisible = selfVisible;
+    }
 
-        public void setPublishTime(long publishTime) {
-            this.publishTime = publishTime;
-        }
+    public long getShareDate() {
+        return shareDate;
+    }
 
-        public int getRealSuperChapterId() {
-            return realSuperChapterId;
-        }
+    public void setShareDate(long shareDate) {
+        this.shareDate = shareDate;
+    }
 
-        public void setRealSuperChapterId(int realSuperChapterId) {
-            this.realSuperChapterId = realSuperChapterId;
-        }
+    public String getShareUser() {
+        return shareUser;
+    }
 
-        public int getSelfVisible() {
-            return selfVisible;
-        }
+    public void setShareUser(String shareUser) {
+        this.shareUser = shareUser;
+    }
 
-        public void setSelfVisible(int selfVisible) {
-            this.selfVisible = selfVisible;
-        }
+    public int getSuperChapterId() {
+        return superChapterId;
+    }
 
-        public long getShareDate() {
-            return shareDate;
-        }
+    public void setSuperChapterId(int superChapterId) {
+        this.superChapterId = superChapterId;
+    }
 
-        public void setShareDate(long shareDate) {
-            this.shareDate = shareDate;
-        }
+    public String getSuperChapterName() {
+        return superChapterName;
+    }
 
-        public String getShareUser() {
-            return shareUser;
-        }
+    public void setSuperChapterName(String superChapterName) {
+        this.superChapterName = superChapterName;
+    }
 
-        public void setShareUser(String shareUser) {
-            this.shareUser = shareUser;
-        }
+    public String getTitle() {
+        return title;
+    }
 
-        public int getSuperChapterId() {
-            return superChapterId;
-        }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-        public void setSuperChapterId(int superChapterId) {
-            this.superChapterId = superChapterId;
-        }
+    public int getType() {
+        return type;
+    }
 
-        public String getSuperChapterName() {
-            return superChapterName;
-        }
+    public void setType(int type) {
+        this.type = type;
+    }
 
-        public void setSuperChapterName(String superChapterName) {
-            this.superChapterName = superChapterName;
-        }
+    public int getUserId() {
+        return userId;
+    }
 
-        public String getTitle() {
-            return title;
-        }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public int getVisible() {
+        return visible;
+    }
 
-        public int getType() {
-            return type;
-        }
+    public void setVisible(int visible) {
+        this.visible = visible;
+    }
 
-        public void setType(int type) {
-            this.type = type;
-        }
+    public int getZan() {
+        return zan;
+    }
 
-        public int getUserId() {
-            return userId;
-        }
+    public void setZan(int zan) {
+        this.zan = zan;
+    }
 
-        public void setUserId(int userId) {
-            this.userId = userId;
-        }
+    public List<TagsBean> getTags() {
+        return tags;
+    }
 
-        public int getVisible() {
-            return visible;
-        }
+    public void setTags(List<TagsBean> tags) {
+        this.tags = tags;
+    }
 
-        public void setVisible(int visible) {
-            this.visible = visible;
-        }
+    public static class TagsBean {
+        /**
+         * name : 本站发布
+         * url : /article/list/0?cid=440
+         */
 
-        public int getZan() {
-            return zan;
-        }
+        private String name;
+        private String url;
 
-        public void setZan(int zan) {
-            this.zan = zan;
+        public String getName() {
+            return name;
         }
 
-        public List<TagsBean> getTags() {
-            return tags;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public void setTags(List<TagsBean> tags) {
-            this.tags = tags;
+        public String getUrl() {
+            return url;
         }
 
-        public static class TagsBean {
-            /**
-             * name : 本站发布
-             * url : /article/list/0?cid=440
-             */
-
-            private String name;
-            private String url;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
+        public void setUrl(String url) {
+            this.url = url;
         }
     }
 }

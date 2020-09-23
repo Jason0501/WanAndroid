@@ -20,20 +20,20 @@ import retrofit2.Call;
  */
 public class CollectionModel extends CollectionContract.Model {
 
-    private MainModel mainModel;
+    private ArticleModel articleModel;
 
     public CollectionModel() {
-        mainModel = new MainModel();
+        articleModel = new ArticleModel();
     }
 
     @Override
     public void addCollection(int articleId, IRequestCallback callback) {
-        mainModel.addCollection(articleId, callback);
+        articleModel.addCollection(articleId, callback);
     }
 
     @Override
     public void cancelCollection(int articleId, IRequestCallback callback) {
-        mainModel.cancelCollection(articleId, callback);
+        articleModel.cancelCollection(articleId, callback);
     }
 
     @Override

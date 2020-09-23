@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/default_toolbar_root"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/default_toolbar_height"
+    android:orientation="vertical">
+
+    <View
+        android:id="@id/default_toolbar_statusbar_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <RelativeLayout
+        android:id="@id/default_toolbar_root"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_toolbar_height"
+        android:background="@color/theme_color">
+
+        <ImageView
+            android:id="@id/default_toolbar_imageview_back"
+            android:layout_width="@dimen/ic_symbol_width"
+            android:layout_height="@dimen/ic_symbol_width"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:src="@drawable/back_white" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@id/default_toolbar_tablayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/tablayout_text_style"
+            app:tabTextColor="@color/tab_select_textcolor" />
+    </RelativeLayout>
+</LinearLayout>

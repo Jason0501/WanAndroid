@@ -3,6 +3,7 @@ package com.jason.www.mvp.model;
 import com.google.gson.reflect.TypeToken;
 import com.jason.www.http.BaseHttpCallback;
 import com.jason.www.http.RetrofitHelper;
+import com.jason.www.http.response.BaseListResponse;
 import com.jason.www.http.response.Question;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.mvp.callback.IRequestCallback;
@@ -20,9 +21,9 @@ import retrofit2.Call;
 public class QuestionModel extends QuestionContract.Model {
     @Override
     public void getQuestion(int page, IRequestCallback callback) {
-        RetrofitHelper.enqueue(new BaseHttpCallback<BaseResponse<Question>>() {
+        RetrofitHelper.enqueue(new BaseHttpCallback<BaseResponse<BaseListResponse<Question>>>() {
             @Override
-            public void success(BaseResponse<Question> response) {
+            public void success(BaseResponse<BaseListResponse<Question>> response) {
                 if (response.isOk()) {
                     callback.success(response);
                 } else {
@@ -39,7 +40,7 @@ public class QuestionModel extends QuestionContract.Model {
             public Call<ResponseBody> getApi() {
                 return RetrofitHelper.getApi().getQuestion(page);
             }
-        }, new TypeToken<BaseResponse<Question>>() {
+        }, new TypeToken<BaseResponse<BaseListResponse<Question>>>() {
         }.getType());
     }
 }

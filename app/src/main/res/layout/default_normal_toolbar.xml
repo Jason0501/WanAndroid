@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/linearlayout_title"
+    android:id="@id/default_toolbar_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <View
+        android:id="@id/default_toolbar_statusbar_placeholder"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@id/default_toolbar_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_toolbar_height"
         android:alpha="0"

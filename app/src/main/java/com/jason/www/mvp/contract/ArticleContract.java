@@ -16,7 +16,7 @@ import java.util.List;
  * @email：1129847330@qq.com
  * @description:
  */
-public interface MainContract {
+public interface ArticleContract {
     abstract class Model extends IBaseModel {
         public abstract void getBannerHome(IRequestCallback callback);
 
@@ -37,7 +37,7 @@ public interface MainContract {
         void successCancelCollection();
     }
 
-    abstract class Presenter extends IBasePresenter<MainContract.Model, MainContract.View> {
+    abstract class Presenter extends IBasePresenter<ArticleContract.Model, ArticleContract.View> {
         public abstract void getBannerHome();
 
         public abstract void getHomeArticles(int page);

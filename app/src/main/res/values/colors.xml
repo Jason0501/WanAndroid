@@ -29,7 +29,7 @@
     <color name="pressed_stroke_color">#48ff46</color>
     <!--松开的边框色-->
     <color name="unpressed_stroke_color">@color/theme_color</color>
-    <color name="tab_select_textcolor">#a7c5fa</color>
+    <color name="tab_select_textcolor">#1104BE02</color>
     <!--遮罩颜色-->
     <color name="blur_mask">#11000000</color>
 </resources>

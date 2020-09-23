@@ -9,7 +9,7 @@ import com.jason.www.http.response.HomeBanner;
 import com.jason.www.http.response.base.BaseBean;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.mvp.callback.IRequestCallback;
-import com.jason.www.mvp.contract.MainContract;
+import com.jason.www.mvp.contract.ArticleContract;
 import com.jason.www.utils.CollectionUtils;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import retrofit2.Call;
  * @email：1129847330@qq.com
  * @description:
  */
-public class MainModel extends MainContract.Model {
+public class ArticleModel extends ArticleContract.Model {
     @Override
     public void getBannerHome(IRequestCallback callback) {
         RetrofitHelper.enqueue(new SmartHttpCallback<BaseResponse<List<HomeBanner>>>() {

@@ -6,8 +6,8 @@ import com.jason.www.http.response.HomeBanner;
 import com.jason.www.http.response.base.BaseBean;
 import com.jason.www.http.response.base.BaseResponse;
 import com.jason.www.mvp.callback.IRequestCallback;
-import com.jason.www.mvp.contract.MainContract;
-import com.jason.www.mvp.model.MainModel;
+import com.jason.www.mvp.contract.ArticleContract;
+import com.jason.www.mvp.model.ArticleModel;
 
 import java.util.List;
 
@@ -17,10 +17,10 @@ import java.util.List;
  * @email：1129847330@qq.com
  * @description:
  */
-public class MainPresenter extends MainContract.Presenter {
+public class ArticlePresenter extends ArticleContract.Presenter {
     @Override
-    protected MainContract.Model createModel() {
-        return new MainModel();
+    protected ArticleContract.Model createModel() {
+        return new ArticleModel();
     }
 
     @Override

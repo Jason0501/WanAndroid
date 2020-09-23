@@ -1,6 +1,7 @@
 package com.jason.www.activity;
 
 import com.google.android.material.tabs.TabLayout;
+import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
 import com.jason.www.adapter.BasePagerAdapter;
 import com.jason.www.base.BaseActivity;
@@ -15,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 public class CollectionActivity extends BaseActivity {
-    @BindView(R.id.tablayout)
+    @BindView(R.id.default_toolbar_tablayout)
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
@@ -26,6 +27,16 @@ public class CollectionActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         initViewPager();
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        ImmersionBar.with(this)
+                .titleBar(R.id.default_toolbar_root)
+                .statusBarView(R.id.default_toolbar_statusbar_placeholder)
+                .statusBarColor(R.color.theme_color)
+                .init();
     }
 
     private void initViewPager() {
