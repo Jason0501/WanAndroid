@@ -7,7 +7,6 @@
     <!--ToolBar-->
     <item name="default_toolbar_root" type="id" />
     <item name="default_toolbar_statusbar_placeholder" type="id" />
-    <item name="default_toolbar_toolbar" type="id" />
     <item name="default_toolbar_textview_title" type="id" />
     <item name="default_toolbar_imageview_back" type="id" />
     <item name="default_toolbar_imageview_more" type="id" />

@@ -16,6 +16,9 @@
     <color name="transparent">#0000</color>
     <color name="trans_6">#6000</color>
     <color name="orange">#f86734</color>
+    <color name="blue">#99CCFF</color>
+    <color name="yellow">#FFFF99</color>
+    <color name="green">#CCFF99</color>
 
     <!--分割线的颜色-->
     <color name="divider">@color/windows_background</color>
@@ -29,7 +32,7 @@
     <color name="pressed_stroke_color">#48ff46</color>
     <!--松开的边框色-->
     <color name="unpressed_stroke_color">@color/theme_color</color>
-    <color name="tab_select_textcolor">#1104BE02</color>
+    <color name="tab_select_textcolor">#cce8cf</color>
     <!--遮罩颜色-->
     <color name="blur_mask">#11000000</color>
 </resources>

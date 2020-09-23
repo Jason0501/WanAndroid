@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.config.AppData;
+import com.jason.www.config.Constants;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,6 +24,7 @@ public abstract class BaseFragment extends LazyFragment {
     protected AppCompatActivity mActivity;
     protected Context mContext;
     private Toast mToast;
+    protected final int PAGE_START = Constants.PAGE_START;
 
     @Override
     public void onAttach(Context context) {
@@ -30,17 +33,18 @@ public abstract class BaseFragment extends LazyFragment {
         mActivity = (AppCompatActivity) context;
     }
 
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+                .keyboardEnable(true)
+                .init();
+    }
+
     @Override
     protected void initView() {
         super.initView();
-        initImmersionBar();
         if (isRegisterEventBus()) {
             EventBus.getDefault().register(this);
         }
-    }
-
-    protected void initImmersionBar() {
-
     }
 
     @Override

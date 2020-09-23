@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
 import com.jason.www.adapter.BasePagerAdapter;
 import com.jason.www.base.BaseActivity;
@@ -50,7 +51,6 @@ public class MainActivity extends BaseActivity {
         BasePagerAdapter adapter = new BasePagerAdapter(mActivity.getSupportFragmentManager(),
                 mFragmentList, mTitleList);
         viewpager.setAdapter(adapter);
-        viewpager.setCurrentItem(0);
         tabLayout.setupWithViewPager(viewpager);
         int size = mFragmentList.size();
         for (int i = 0; i < size; i++) {
@@ -75,6 +75,41 @@ public class MainActivity extends BaseActivity {
             textview.setText(mTitleList.get(i));
             tabLayout.getTabAt(i).setCustomView(view);
         }
+    }
+
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        ImmersionBar.with(MainActivity.this).statusBarDarkFont(false).statusBarColor(R.color.transparent).init();
+                        break;
+                    case 1:
+                        ImmersionBar.with(MainActivity.this).statusBarDarkFont(false).statusBarColor(R.color.orange).init();
+                        break;
+                    case 2:
+                        ImmersionBar.with(MainActivity.this).statusBarDarkFont(false).statusBarColor(R.color.blue).init();
+                        break;
+                    case 3:
+                        ImmersionBar.with(MainActivity.this).statusBarDarkFont(true).statusBarColor(R.color.yellow).init();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        viewpager.setCurrentItem(0);
     }
 
     @Override

@@ -3,8 +3,9 @@ package com.jason.www.fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.jason.www.R;
 import com.jason.www.adapter.ArticleAdapter;
 import com.jason.www.adapter.HomeBannerAdapter;
@@ -46,12 +47,16 @@ public class HomeFragment extends BaseMvpFragment<ArticlePresenter> implements A
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartrefreshlayout;
-    @BindView(R.id.default_toolbar_toolbar)
+    @BindView(R.id.default_toolbar_root)
     Toolbar toolbar;
+    @BindView(R.id.default_toolbar_textview_title)
+    TextView textviewTitle;
+    @BindView(R.id.default_toolbar_imageview_back)
+    ImageView imageviewBack;
     Banner mBanner;
     private ArticleAdapter mArticleAdapter;
     private boolean mIsRefresh;
-    private int mPage;
+    private int mPage = PAGE_START;
     private int mBannerHeight;
 
     private HomeFragment() {
@@ -64,15 +69,10 @@ public class HomeFragment extends BaseMvpFragment<ArticlePresenter> implements A
     @Override
     protected void initView() {
         super.initView();
+        toolbar.setAlpha(0);
+        imageviewBack.setVisibility(View.GONE);
+        textviewTitle.setText(getString(R.string.home));
         initRecyclerView();
-    }
-
-    @Override
-    protected void initImmersionBar() {
-        super.initImmersionBar();
-        ImmersionBar.with(this)
-                .titleBar(R.id.default_toolbar_toolbar)
-                .init();
     }
 
     private void initRecyclerView() {
@@ -127,7 +127,7 @@ public class HomeFragment extends BaseMvpFragment<ArticlePresenter> implements A
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mIsRefresh = true;
-                mPage = 0;
+                mPage = PAGE_START;
                 getPresenter().getBannerHome();
                 getPresenter().getHomeArticles(mPage);
             }

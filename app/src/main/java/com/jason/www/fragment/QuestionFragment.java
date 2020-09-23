@@ -1,6 +1,8 @@
 package com.jason.www.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -35,8 +37,12 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartrefreshlayout;
+    @BindView(R.id.default_toolbar_textview_title)
+    TextView textviewTitle;
+    @BindView(R.id.default_toolbar_imageview_back)
+    ImageView imageviewBack;
     private QuestionAdapter mAdapter;
-    private int mPage;
+    private int mPage = PAGE_START;
     private boolean mIsRefresh;
 
     private QuestionFragment() {
@@ -49,6 +55,8 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
     @Override
     protected void initView() {
         super.initView();
+        imageviewBack.setVisibility(View.GONE);
+        textviewTitle.setText(getString(R.string.question));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
@@ -69,7 +77,7 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mIsRefresh = true;
-                mPage = 0;
+                mPage = PAGE_START;
                 initData();
             }
         });
@@ -95,7 +103,7 @@ public class QuestionFragment extends BaseMvpFragment<QuestionPresenter> impleme
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.layout_refresh_list;
+        return R.layout.layout_refresh_list_with_toolbar;
     }
 
     @Override

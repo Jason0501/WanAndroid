@@ -24,7 +24,7 @@
     </style>
 
     <style name="tablayout_text_style">
-        <item name="android:textSize">@dimen/textsize_middle</item>
+        <item name="android:textSize">@dimen/textsize_large</item>
     </style>
 
 </resources>

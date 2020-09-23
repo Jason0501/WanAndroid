@@ -1,6 +1,8 @@
 package com.jason.www.fragment;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -33,6 +35,10 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
     RecyclerView recyclerview;
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartrefreshlayout;
+    @BindView(R.id.default_toolbar_textview_title)
+    TextView textviewTitle;
+    @BindView(R.id.default_toolbar_imageview_back)
+    ImageView imageviewBack;
     private FrequentWebSiteAdapter mAdapter;
 
     private FrequentWebSiteFragment() {
@@ -45,6 +51,8 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
     @Override
     protected void initView() {
         super.initView();
+        imageviewBack.setVisibility(View.GONE);
+        textviewTitle.setText(getString(R.string.frequent_web_site));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerview.setLayoutManager(linearLayoutManager);
         recyclerview.addItemDecoration(CommonItemDecoration.createVertical());
@@ -78,7 +86,7 @@ public class FrequentWebSiteFragment extends BaseMvpFragment<FrequentWebSitePres
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.layout_refresh_list;
+        return R.layout.layout_refresh_list_with_toolbar;
     }
 
     @Override

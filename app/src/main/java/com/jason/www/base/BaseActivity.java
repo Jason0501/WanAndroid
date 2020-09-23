@@ -2,14 +2,16 @@ package com.jason.www.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
+import com.jason.www.config.Constants;
 
 import org.greenrobot.eventbus.EventBus;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
@@ -26,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
     protected AppCompatActivity mActivity;
     private Toast toast;
+    protected final int PAGE_START = Constants.PAGE_START;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,28 +39,28 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
         ActivityManagerDelegate.getInstance().addActivity(this);
         unbinder = ButterKnife.bind(this);
-        initImmersionBar();
         initMvp();
         initView();
         initData();
         initEvent();
     }
 
-    protected void hideStatusBar() {
-        ImmersionBar.with(this)
-                .hideBar(BarHide.FLAG_HIDE_BAR)
-                .init();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initImmersionBar();
     }
 
-    protected void showStatusBar() {
-        ImmersionBar.with(this)
-                .hideBar(BarHide.FLAG_SHOW_BAR)
-                .init();
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        initImmersionBar();
     }
 
     protected void initImmersionBar() {
         //设置共同沉浸式样式
         ImmersionBar.with(this)
+                .keyboardEnable(true)
                 .init();
     }
 

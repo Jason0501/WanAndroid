@@ -1,6 +1,7 @@
 package com.jason.www.base;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +74,11 @@ public abstract class LazyFragment extends CacheFragment {
                 dispatchUserVisibleHint(false);
             }
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override

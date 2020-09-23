@@ -31,7 +31,7 @@ public class CollectionFragment extends BaseMvpFragment<CollectionPresenter> imp
     @BindView(R.id.smartrefreshlayout)
     SmartRefreshLayout smartrefreshlayout;
     private ArticleAdapter mAdapter;
-    private int mPage;
+    private int mPage = PAGE_START;
     private boolean mIsRefresh;
 
     private CollectionFragment() {
@@ -64,7 +64,7 @@ public class CollectionFragment extends BaseMvpFragment<CollectionPresenter> imp
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mIsRefresh = true;
-                mPage = 0;
+                mPage = PAGE_START;
                 initData();
             }
         });
