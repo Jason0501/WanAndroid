@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
     <application
         android:name=".base.RunApplication"
@@ -54,6 +55,7 @@
             android:label="@string/activity_register"
             android:windowSoftInputMode="adjustPan|stateVisible" />
         <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.AgentWebActivity" />
     </application>
 
 </manifest>

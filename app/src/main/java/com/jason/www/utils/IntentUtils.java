@@ -2,7 +2,7 @@ package com.jason.www.utils;
 
 import android.content.Intent;
 
-import com.jason.www.activity.WebViewActivity;
+import com.jason.www.activity.AgentWebActivity;
 import com.jason.www.base.ActivityManagerDelegate;
 import com.jason.www.config.AppData;
 import com.jason.www.config.Constants;
@@ -15,7 +15,7 @@ import com.jason.www.config.Constants;
  */
 public class IntentUtils {
     public static void goToWebViewActivity(String url) {
-        Intent intent = new Intent(AppData.getContext(), WebViewActivity.class);
+        Intent intent = new Intent(AppData.getContext(), AgentWebActivity.class);
         intent.putExtra(Constants.IntentKey.WEBVIEW_URL, url);
         ActivityManagerDelegate.getInstance().currentActivity().startActivity(intent);
     }
