@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jason.www.R;
+import com.jason.www.activity.AboutActivity;
 import com.jason.www.activity.CollectionActivity;
 import com.jason.www.activity.LoginActivity;
 import com.jason.www.base.BaseMvpFragment;
@@ -176,6 +177,7 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
             case R.id.ll_read_record:
                 break;
             case R.id.ll_about_me:
+                startActivity(AboutActivity.class);
                 break;
             case R.id.ll_setting:
                 break;

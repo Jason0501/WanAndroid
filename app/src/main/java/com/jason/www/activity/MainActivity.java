@@ -25,6 +25,12 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
+/**
+ * @author：Jason
+ * @date: 2020/12/2 13:37
+ * @email：1129847330@qq.com
+ * @description:
+ */
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tablayout)
