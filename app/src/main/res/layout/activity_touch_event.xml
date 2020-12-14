@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jason.www.widget.MyFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myfl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#40f0"
+    tools:context=".activity.TouchEventActivity">
+
+    <com.jason.www.widget.MyLinearLayout
+        android:id="@+id/myll"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="#f00"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.jason.www.widget.MyTextView
+            android:id="@+id/mytv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#00f" />
+
+    </com.jason.www.widget.MyLinearLayout>
+
+</com.jason.www.widget.MyFrameLayout>
