@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jason.www.R;
 import com.jason.www.activity.AboutActivity;
 import com.jason.www.activity.CollectionActivity;
+import com.jason.www.activity.KotlinHelloWorldActivity;
 import com.jason.www.activity.LoginActivity;
 import com.jason.www.activity.TouchEventActivity;
 import com.jason.www.base.BaseMvpFragment;
@@ -157,7 +158,8 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
     }
 
     @OnClick({R.id.civ_user_icon, R.id.ll_coin, R.id.ll_share, R.id.ll_collect, R.id.ll_read_record,
-            R.id.ll_about_me, R.id.ll_setting, R.id.tv_login_out, R.id.tv_user_name, R.id.ll_touchevent})
+            R.id.ll_about_me, R.id.ll_setting, R.id.tv_login_out, R.id.tv_user_name, R.id.ll_touchevent,
+            R.id.ll_kotlin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.civ_user_icon:
@@ -187,6 +189,9 @@ public class MineFragment extends BaseMvpFragment<MinePresenter> implements Mine
                 break;
             case R.id.tv_login_out:
                 showLoginOutDialog();
+                break;
+            case R.id.ll_kotlin:
+                startActivity(KotlinHelloWorldActivity.class);
                 break;
         }
     }
